@@ -1,10 +1,12 @@
 import csv
 import numpy as np
 import cv2 as cv
-data_home = '/home/nora/work/CarND-Behavioral-Cloning-P3/'
+#data_home = '/home/nora/work/CarND-Behavioral-Cloning-P3/'
+data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/'
 
 def load_data():
-    data_dirs = ['data', 'track1']
+    #data_dirs = ['data', 'track1']
+    data_dirs = ['data']
     images_paths = []
     measurements = []
     for dir in data_dirs:
@@ -16,12 +18,12 @@ def load_data():
                 # center camera
                 images_paths.append(get_filename(line[0], dir))
                 measurements.append(angle)
-                # left camera
-                images_paths.append(get_filename(line[1], dir))
-                measurements.append(angle + correction)
-                # right camera
-                images_paths.append(get_filename(line[2], dir))
-                measurements.append(angle - correction) 
+#                 # left camera
+#                 images_paths.append(get_filename(line[1], dir))
+#                 measurements.append(angle + correction)
+#                 # right camera
+#                 images_paths.append(get_filename(line[2], dir))
+#                 measurements.append(angle - correction) 
     return (np.array(images_paths), np.array(measurements))
 
 def get_filename(path,dir):
