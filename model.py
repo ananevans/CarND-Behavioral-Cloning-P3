@@ -3,6 +3,10 @@ import numpy as np
             
 from keras.models import Sequential
 from keras.layers import Flatten, Dense, Lambda
+
+import tensorflow as tf
+tf.Session(config=tf.ConfigProto(log_device_placement=True))
+
 def basic_model():
     model = Sequential()
     # normalize and center the data

@@ -4,6 +4,9 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers import Flatten, Dense, Lambda, Convolution2D, MaxPooling2D, Cropping2D
 
+import tensorflow as tf
+tf.Session(config=tf.ConfigProto(log_device_placement=True))
+
 # used implementation from https://github.com/TaavishThaman/LeNet-5-with-Keras/blob/master/lenet_5.py
 def lenet():
     model = Sequential()

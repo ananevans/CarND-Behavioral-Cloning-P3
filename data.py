@@ -1,7 +1,6 @@
 import csv
 import numpy as np
 import cv2 as cv
-
 data_home = '/home/nora/work/CarND-Behavioral-Cloning-P3/'
 
 def load_data():
