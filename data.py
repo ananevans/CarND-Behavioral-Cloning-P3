@@ -14,7 +14,7 @@ def load_data():
             reader = csv.reader(csvfile)
             for line in reader:
                 angle = float(line[3])
-                correction = 0.15
+                correction = 0.2
                 # center camera
                 images_paths.append(get_filename(line[0], dir))
                 measurements.append(angle)
