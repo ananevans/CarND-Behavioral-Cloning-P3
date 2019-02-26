@@ -5,7 +5,7 @@ import cv2 as cv
 data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/'
 
 def load_data():
-    data_dirs = ['data', 'track1', 'correction', 'track1_backwards', 'track2', 'track2_more']
+    data_dirs = ['data', 'track1', 'correction', 'track1_backwards', 'track2', 'track2_more', 'track1_curve']
     #data_dirs = ['data']
     images_paths = []
     measurements = []
