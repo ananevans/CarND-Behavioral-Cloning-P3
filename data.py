@@ -14,16 +14,16 @@ def load_data():
             reader = csv.reader(csvfile)
             for line in reader:
                 angle = float(line[3])
-                correction = 0.2
+                correction = 0.15
                 # center camera
                 images_paths.append(get_filename(line[0], dir))
                 measurements.append(angle)
-#                 # left camera
-#                 images_paths.append(get_filename(line[1], dir))
-#                 measurements.append(angle + correction)
-#                 # right camera
-#                 images_paths.append(get_filename(line[2], dir))
-#                 measurements.append(angle - correction) 
+                # left camera
+                images_paths.append(get_filename(line[1], dir))
+                measurements.append(angle + correction)
+                # right camera
+                images_paths.append(get_filename(line[2], dir))
+                measurements.append(angle - correction) 
     return (np.array(images_paths), np.array(measurements))
 
 def get_filename(path,dir):
