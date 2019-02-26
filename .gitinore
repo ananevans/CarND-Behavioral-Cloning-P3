@@ -1,0 +1,4 @@
+*.h5
+.project
+__pycache__
+.pydevproject
