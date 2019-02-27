@@ -1,12 +1,12 @@
 import csv
 import numpy as np
 import cv2 as cv
-data_home = '/home/nora/work/CarND-Behavioral-Cloning-P3/data/'
-#data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
+#data_home = '/home/nora/work/CarND-Behavioral-Cloning-P3/data/'
+data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 
 def load_data():
-    #data_dirs = ['data', 'track1', 'correction', 'track1_backwards', 'track2', 'track2_more', 'track1_curve', 'maxwell', 'maxwell2', 'maxwell_reverse', 'no_borders']
-    data_dirs = ['data', 'correction', 'track2', 'track1_curve', 'maxwell2', 'maxwell_reverse', 'no_borders', 'curves', 'curves_track2']
+    #data_dirs = ['data', 'track1', 'correction', 'track1_backwards', 'track2', 'track2_more', 'track1_curve', 'maxwell', 'maxwell2', 'maxwell_reverse', 'no_borders', 'curves', 'curves_track2', 'sharp_curves']
+    data_dirs = ['data', 'correction', 'track2', 'track1_curve', 'maxwell2', 'no_borders', 'curves', 'curves_track2', 'sharp_curves']
     images_paths = []
     measurements = []
     for dir in data_dirs:
