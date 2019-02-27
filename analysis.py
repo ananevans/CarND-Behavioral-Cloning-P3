@@ -2,7 +2,7 @@ import data
 import numpy as np
 import matplotlib.pyplot as plt
 
-samples = data.load_data()
+samples = data.load_data(False, False)
 y_train = samples[:,2]
 print(y_train.shape)
 y_train = y_train.astype(float)

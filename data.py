@@ -4,9 +4,13 @@ import cv2 as cv
 #data_home = '/home/nora/work/CarND-Behavioral-Cloning-P3/data/'
 data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 
-def load_data():
-    data_dirs = ['data', 'track1', 'correction', 'track1_backwards', 'track2', 'track2_more', 'track1_curve', 'maxwell', 'maxwell2', 'maxwell_reverse', 'no_borders', 'curves', 'curves_track2', 'sharp_curves']
-    #data_dirs = ['data', 'correction', 'track2', 'track1_curve', 'maxwell2', 'no_borders', 'curves', 'curves_track2', 'sharp_curves']
+def load_data(track1, side_cameras):
+    if track1:
+        data_dirs = ['data', 'track1_center', 'track1_center_reverse', 'track1_curves', 
+                 'track1_curves_reverse', 'track1_off_center', 'track1_off_center_reverse', 'track2', 'track2_reverse']
+    else:
+        data_dirs = ['data', 'track1_center', 'track1_center_reverse', 'track1_curves', 
+                 'track1_curves_reverse', 'track1_off_center', 'track1_off_center_reverse', 'track2', 'track2_reverse']
     result = []
     for dir in data_dirs:
         with open(data_home + dir + '/driving_log.csv') as csvfile:
@@ -17,12 +21,13 @@ def load_data():
                 # center camera
                 result.append((get_filename(line[0], dir), False, angle))
                 result.append((get_filename(line[0], dir), True, -angle))
-                # left camera
-                result.append((get_filename(line[1], dir), False, (angle + correction)))
-                result.append((get_filename(line[1], dir), True, -(angle + correction)))
-                # right camera
-                result.append((get_filename(line[2], dir), False, (angle - correction)))
-                result.append((get_filename(line[2], dir), True, -(angle - correction)))
+                if side_cameras:
+                    # left camera
+                    result.append((get_filename(line[1], dir), False, (angle + correction)))
+                    result.append((get_filename(line[1], dir), True, -(angle + correction)))
+                    # right camera
+                    result.append((get_filename(line[2], dir), False, (angle - correction)))
+                    result.append((get_filename(line[2], dir), True, -(angle - correction)))
     return np.array(result)
 
 
