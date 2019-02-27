@@ -7,8 +7,7 @@ data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 def load_data():
     data_dirs = ['data', 'track1', 'correction', 'track1_backwards', 'track2', 'track2_more', 'track1_curve', 'maxwell', 'maxwell2', 'maxwell_reverse', 'no_borders', 'curves', 'curves_track2', 'sharp_curves']
     #data_dirs = ['data', 'correction', 'track2', 'track1_curve', 'maxwell2', 'no_borders', 'curves', 'curves_track2', 'sharp_curves']
-    images_paths = []
-    measurements = []
+    result = []
     for dir in data_dirs:
         with open(data_home + dir + '/driving_log.csv') as csvfile:
             reader = csv.reader(csvfile)
@@ -16,30 +15,54 @@ def load_data():
                 angle = float(line[3])
                 correction = 0.2
                 # center camera
-                images_paths.append(get_filename(line[0], dir))
-                measurements.append(angle)
+                result.append((get_filename(line[0], dir), False, angle))
+                result.append((get_filename(line[0], dir), True, -angle))
                 # left camera
-                images_paths.append(get_filename(line[1], dir))
-                measurements.append(angle + correction)
+                result.append((get_filename(line[1], dir), False, (angle + correction)))
+                result.append((get_filename(line[1], dir), True, -(angle + correction)))
                 # right camera
-                images_paths.append(get_filename(line[2], dir))
-                measurements.append(angle - correction) 
-    return (np.array(images_paths), np.array(measurements))
+                result.append((get_filename(line[2], dir), False, (angle - correction)))
+                result.append((get_filename(line[2], dir), True, -(angle - correction)))
+    return np.array(result)
 
+
+import sklearn.utils
+def generator(samples, batch_size=10000):
+    num_samples = len(samples)
+    while 1: # Loop forever so the generator never terminates
+        samples = sklearn.utils.shuffle(samples)
+        for offset in range(0, num_samples, batch_size):
+            batch_samples = samples[offset:offset+batch_size]
+            images = []
+            angles = []
+            for image_name, flip, angle in batch_samples:
+                angle = float(angle)
+                flip = bool(flip)
+                image = cv.imread(image_name)
+                if flip:
+                    images.append(np.flip(image,1))
+                else:
+                    images.append(image)
+                angles.append(np.float(angle))
+            X_train = np.array(images)
+            y_train = np.array(angles)
+            yield (X_train, y_train)
+
+                    
 def get_filename(path,dir):
     filename = path.split('/')[-1]
     return (data_home + dir + '/IMG/' + filename)
 
-def load_images(files):
-    X_train = []
-    for filename in files:
-        X_train.append(cv.imread(filename))
-    return np.array(X_train)
-
-def flip_images(images, measurements):
-    new_images = np.copy(images)
-    new_measurements = np.copy(measurements)
-    for i in range(new_images.shape[0]):
-        new_images[i] = np.flip(images[i],1)
-        new_measurements[i] = -measurements[i]
-    return (new_images, new_measurements) 
+# def load_images(files):
+#     X_train = []
+#     for filename in files:
+#         X_train.append(cv.imread(filename))
+#     return np.array(X_train)
+# 
+# def flip_images(images, measurements):
+#     new_images = np.copy(images)
+#     new_measurements = np.copy(measurements)
+#     for i in range(new_images.shape[0]):
+#         new_images[i] = np.flip(images[i],1)
+#         new_measurements[i] = -measurements[i]
+#     return (new_images, new_measurements) 

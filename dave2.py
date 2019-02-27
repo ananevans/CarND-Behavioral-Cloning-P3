@@ -48,17 +48,18 @@ def dave2():
 
 import cv2 as cv
 
-files, y_train = data.load_data()
-X_train = []
-for filename in files:
-    X_train.append(cv.imread(filename))
-X_train = np.array(X_train)
-X_flipped, y_flipped = data.flip_images(X_train, y_train)
+samples = data.load_data()
 
-X_augmented = np.concatenate((X_train, X_flipped))
-y_augmented = np.concatenate((y_train, y_flipped))
+from sklearn.model_selection import train_test_split
+train_samples, validation_samples = train_test_split(samples, test_size=0.2)
+
+train_generator = data.generator(train_samples, batch_size=32)
+validation_generator = data.generator(validation_samples, batch_size=32)
 
 model = dave2()
-model.fit(X_augmented, y_augmented, validation_split=0.2, shuffle=True, epochs=5)
+#model.fit(X_augmented, y_augmented, validation_split=0.2, shuffle=True, epochs=5)
+model.fit_generator(train_generator, samples_per_epoch = len(train_samples), 
+                    validation_data=validation_generator,
+                    nb_val_samples=len(validation_samples), nb_epoch=5)
 
 model.save('dave2-all.h5')
