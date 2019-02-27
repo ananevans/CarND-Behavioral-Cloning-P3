@@ -61,4 +61,4 @@ y_augmented = np.concatenate((y_train, y_flipped))
 model = dave2()
 model.fit(X_augmented, y_augmented, validation_split=0.2, shuffle=True, epochs=5)
 
-model.save('dave2.h5')
+model.save('dave2-all.h5')
