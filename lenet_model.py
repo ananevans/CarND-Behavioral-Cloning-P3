@@ -1,4 +1,5 @@
 import data
+import train
 import numpy as np
             
 from keras.models import Sequential
@@ -45,19 +46,7 @@ def lenet():
     model.compile(loss='mse', optimizer='adam')
     return model
 
-import cv2 as cv
-
-files, y_train = data.load_data()
-X_train = []
-for filename in files:
-    X_train.append(cv.imread(filename))
-X_train = np.array(X_train)
-X_flipped, y_flipped = data.flip_images(X_train, y_train)
-
-X_augmented = np.concatenate((X_train, X_flipped))
-y_augmented = np.concatenate((y_train, y_flipped))
-
-model = lenet()
-model.fit(X_augmented, y_augmented, validation_split=0.2, shuffle=True, epochs=5)
-
-model.save('lenet.h5')
+train.train(lenet(), 'lenet', True, True)
+train.train(lenet(), 'lenet', True, False)
+train.train(lenet(), 'lenet', False, True)
+train.train(lenet(), 'lenet', False, False)

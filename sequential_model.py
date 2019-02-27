@@ -1,4 +1,5 @@
 import data
+import train
 import numpy as np
             
 from keras.models import Sequential
@@ -17,12 +18,7 @@ def basic_model():
     model.compile(loss='mse', optimizer='adam')
     return model
 
-import cv2 as cv
-
-files, y_train = data.load_data()
-X_train = data.load_images(files)
-
-model = basic_model()
-model.fit(X_train, y_train, validation_split=0.2, shuffle=True, epochs=3)
-
-model.save('basic_model.h5')
+train.train(basic_model(), 'sequential', True, True)
+train.train(basic_model(), 'sequential', True, False)
+train.train(basic_model(), 'sequential', False, True)
+train.train(basic_model(), 'sequential', False, False)

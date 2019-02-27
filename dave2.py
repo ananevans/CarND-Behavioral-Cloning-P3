@@ -1,11 +1,11 @@
 import data
+import train
 import numpy as np
             
 from keras.models import Sequential
 from keras.layers import Flatten, Dense, Lambda, Convolution2D, MaxPooling2D, Cropping2D, BatchNormalization
 
 import tensorflow as tf
-from builtins import True
 tf.Session(config=tf.ConfigProto(log_device_placement=True))
 
 track1 = True
@@ -50,31 +50,4 @@ def dave2():
     
     return model
 
-import cv2 as cv
-
-samples = data.load_data(track1, side_cameras)
-
-from sklearn.model_selection import train_test_split
-train_samples, validation_samples = train_test_split(samples, test_size=0.2)
-
-train_generator = data.generator(train_samples, batch_size=32)
-validation_generator = data.generator(validation_samples, batch_size=32)
-
-model = dave2()
-#model.fit(X_augmented, y_augmented, validation_split=0.2, shuffle=True, epochs=5)
-model.fit_generator(train_generator, samples_per_epoch = len(train_samples), 
-                    validation_data=validation_generator,
-                    nb_val_samples=len(validation_samples), nb_epoch=5)
-
-if track1:
-    if side_cameras:
-        name = 'dave2_track1_sides'
-    else:
-        name = 'dave2_track1'
-else:
-    if side_cameras:
-        name = 'dave2_all_sides'
-    else:
-        name = 'dave2_all'
-
-model.save(name)
+train(dave2(), 'dave2', track1, side_cameras)
