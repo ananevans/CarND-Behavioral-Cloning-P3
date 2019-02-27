@@ -18,7 +18,7 @@ def basic_model():
     model.compile(loss='mse', optimizer='adam')
     return model
 
-train.train(basic_model(), 'sequential', True, True)
-train.train(basic_model(), 'sequential', True, False)
-train.train(basic_model(), 'sequential', False, True)
-train.train(basic_model(), 'sequential', False, False)
+train.train(basic_model(), 'sequential', True, True, False, 3)
+train.train(basic_model(), 'sequential', True, False, False, 3)
+train.train(basic_model(), 'sequential', False, True, False, 3)
+train.train(basic_model(), 'sequential', False, False, False, 3)

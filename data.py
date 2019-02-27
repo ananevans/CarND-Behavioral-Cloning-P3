@@ -53,6 +53,25 @@ def generator(samples, batch_size=10000):
             y_train = np.array(angles)
             yield (X_train, y_train)
 
+
+def load_images(samples):
+    images = []
+    angles = []
+    for image_name, flip, angle in samples:
+        angle = float(angle)
+        flip = bool(flip)
+        image = cv.imread(image_name)
+        if flip:
+            images.append(np.flip(image,1))
+        else:
+            images.append(image)
+        angles.append(np.float(angle))
+    X_train = np.array(images)
+    y_train = np.array(angles)
+    return (X_train, y_train)
+
+                    
+
                     
 def get_filename(path,dir):
     filename = path.split('/')[-1]

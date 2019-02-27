@@ -46,7 +46,7 @@ def lenet():
     model.compile(loss='mse', optimizer='adam')
     return model
 
-train.train(lenet(), 'lenet', True, True)
-train.train(lenet(), 'lenet', True, False)
-train.train(lenet(), 'lenet', False, True)
-train.train(lenet(), 'lenet', False, False)
+train.train(lenet(), 'lenet', True, True, False, 3)
+train.train(lenet(), 'lenet', True, False, False, 3)
+train.train(lenet(), 'lenet', False, True, False, 3)
+train.train(lenet(), 'lenet', False, False, False, 3)
