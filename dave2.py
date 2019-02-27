@@ -50,4 +50,5 @@ def dave2():
     
     return model
 
-train(dave2(), 'dave2', track1, side_cameras, False, 5)
+model = dave2()
+train( model, 'dave2', track1, side_cameras, False, 5)
