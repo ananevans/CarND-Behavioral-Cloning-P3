@@ -51,5 +51,7 @@ def dave2():
     
     return model
 
-model = dave2()
-train.train( model, 'dave2', track1, side_cameras, False, 5)
+train.train( dave2(), 'dave2', True, True, False, 5)
+train.train( dave2(), 'dave2', True, False, False, 5)
+train.train( dave2(), 'dave2', False, True, False, 5)
+train.train( dave2(), 'dave2', False, False, False, 5)
