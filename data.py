@@ -6,8 +6,9 @@ data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 
 def load_data(track1, side_cameras):
     if track1:
-        data_dirs = ['data', 'track1_center', 'track1_center_reverse', 'track1_curves', 
-                 'track1_curves_reverse', 'track1_off_center', 'track1_off_center_reverse', 'track2', 'track2_reverse']
+#         data_dirs = ['data', 'track1_center', 'track1_center_reverse', 'track1_curves', 
+#                  'track1_curves_reverse', 'track1_off_center', 'track1_off_center_reverse', 'track2', 'track2_reverse']
+        data_dirs = ['data']
     else:
         data_dirs = ['data', 'track1_center', 'track1_center_reverse', 'track1_curves', 
                  'track1_curves_reverse', 'track1_off_center', 'track1_off_center_reverse', 'track2', 'track2_reverse']
@@ -53,7 +54,7 @@ def generator(samples, batch_size=10000):
             y_train = np.array(angles)
             yield (X_train, y_train)
 
-
+                
 def load_images(samples):
     images = []
     angles = []
