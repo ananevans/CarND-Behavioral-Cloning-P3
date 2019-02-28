@@ -15,7 +15,7 @@ def dave2():
     model = Sequential()
     model.add(BatchNormalization(input_shape=(160,320,3)))
     # cropping
-    model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(160,320,3)))
+    model.add(Cropping2D(cropping=((55,20), (0,0)), input_shape=(160,320,3)))
     
     model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
