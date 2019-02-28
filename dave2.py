@@ -8,7 +8,7 @@ from keras.layers import Flatten, Dense, Lambda, Convolution2D, MaxPooling2D, Cr
 import tensorflow as tf
 tf.Session(config=tf.ConfigProto(log_device_placement=True))
 
-track1 = True
+track1 = False
 side_cameras = False
 
 # used implementation from https://github.com/TaavishThaman/LeNet-5-with-Keras/blob/master/lenet_5.py
