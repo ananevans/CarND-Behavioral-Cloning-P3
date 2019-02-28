@@ -3,7 +3,7 @@ import train
 import numpy as np
             
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda, Convolution2D, MaxPooling2D, Cropping2D, BatchNormalization
+from keras.layers import Flatten, Dense, Lambda, Conv2D, MaxPooling2D, Cropping2D, BatchNormalization
 
 import tensorflow as tf
 tf.Session(config=tf.ConfigProto(log_device_placement=True))
@@ -11,22 +11,21 @@ tf.Session(config=tf.ConfigProto(log_device_placement=True))
 track1 = True
 side_cameras = True
 
-# used implementation from https://github.com/TaavishThaman/LeNet-5-with-Keras/blob/master/lenet_5.py
 def dave2():
     model = Sequential()
     model.add(BatchNormalization(input_shape=(160,320,3)))
     # cropping
     model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(160,320,3)))
     
-    model.add(Convolution2D(24, 5, 5, subsample=(2,2), activation='relu'))
+    model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
-    model.add(Convolution2D(36, 5, 5, subsample=(2,2), activation='relu'))
+    model.add(Conv2D(36, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
-    model.add(Convolution2D(48, 5, 5, subsample=(2,2), activation='relu'))
+    model.add(Conv2D(48, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
-    model.add(Convolution2D(64, 3, 3, activation='relu'))
+    model.add(Conv2D(64, (3, 3), activation="relu", padding="valid"))
     
-    model.add(Convolution2D(64, 3, 3, activation='relu'))
+    model.add(Conv2D(64, (3, 3), activation="relu", padding="valid"))
     
     # flatten
     model.add(Flatten())
@@ -47,6 +46,8 @@ def dave2():
     model.add(Dense(1))
     
     model.compile(loss="mse", optimizer='adam')
+    
+    print(model.summary())
     
     return model
 
