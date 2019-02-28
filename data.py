@@ -77,7 +77,7 @@ def load_images(samples):
                     
 def get_filename(path,dir):
     filename = path.split('/')[-1]
-    return (data_home + dir + '/IMG/' + filename)
+    return (dir + '/IMG/' + filename)
 
 # def load_images(files):
 #     X_train = []
