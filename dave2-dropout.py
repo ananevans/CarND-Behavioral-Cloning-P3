@@ -13,7 +13,7 @@ side_cameras = True
 
 def dave2():
     model = Sequential()
-    model.add(Lambda(lambda x: (x / 255.0) - 0.5))
+    model.add(Lambda(lambda x: (x / 255.0) - 0.5), input_shape=(160,320,3))
     # cropping
     model.add(Cropping2D(cropping=((55,20), (0,0)), input_shape=(160,320,3)))
 
