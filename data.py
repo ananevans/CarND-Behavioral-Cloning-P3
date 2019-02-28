@@ -1,35 +1,35 @@
 import csv
 import numpy as np
 import cv2 as cv
+import random
+import glob
+
 #data_home = '/home/nora/work/CarND-Behavioral-Cloning-P3/data/'
 data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 
 def load_data(track1, side_cameras):
     if track1:
-        data_dirs = ['data', 'track1_center', 'track1_center_reverse', 'track1_curves', 
-                 'track1_curves_reverse', 'track1_off_center', 'track1_off_center_reverse', 
-                 'track1_center_1', 'track1_center_reverse_1', 
-                 'track1_curves_1', 'track1_curves_reverse_1']
+        data_dirs = glob.glob(data_home + 'track1*')
     else:
-        data_dirs = ['data', 'track1_center', 'track1_center_reverse', 'track1_curves', 
-                 'track1_curves_reverse', 'track1_off_center', 'track1_off_center_reverse', 
-                 'track2', 'track2_reverse', 'track1_center_1', 'track1_center_reverse_1', 
-                 'track1_curves_1', 'track1_curves_reverse_1', 'track2_1']
+        data_dirs = glob.glob(data_home + '*')
     result = []
     for dir in data_dirs:
-        with open(data_home + dir + '/driving_log.csv') as csvfile:
+        with open(dir + '/driving_log.csv') as csvfile:
             reader = csv.reader(csvfile)
             for line in reader:
                 angle = float(line[3])
-                correction = 0.2
+                correction = random.uniform(1.9,0.26)
                 # center camera
                 result.append((get_filename(line[0], dir), False, angle))
-                result.append((get_filename(line[0], dir), True, -angle))
+                if abs(angle) > 0.05:
+                    result.append((get_filename(line[0], dir), True, -angle))
                 if side_cameras:
                     # left camera
                     result.append((get_filename(line[1], dir), False, (angle + correction)))
+                    result.append((get_filename(line[1], dir), True, -(angle + correction)))
                     # right camera
                     result.append((get_filename(line[2], dir), False, (angle - correction)))
+                    result.append((get_filename(line[2], dir), True, -(angle - correction)))
     return np.array(result)
 
 

@@ -3,14 +3,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
-# samples = data.load_data(False, True)
-# y_train = samples[:,2]
-# print(y_train.shape)
-# y_train = y_train.astype(float)
-# print(y_train)
-# 
-# plt.hist(y_train, bins=[-1,-0.7,-0.5,-0.3,-0.1,0.1,0.3,0.5,0.7,1])
-# plt.show()
+def data_distribution():
+    samples = data.load_data(False, True)
+    y_train = samples[:,2]
+    print(y_train.shape)
+    y_train = y_train.astype(float)
+    print(y_train)
+ 
+    plt.hist(y_train, bins=[-1,-0.7,-0.5,-0.3,-0.1,0.1,0.3,0.5,0.7,1])
+    plt.show()
 
 def cropping():
     center = plt.imread('/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/track1_center/IMG/center_2019_02_27_21_20_15_232.jpg')
@@ -40,4 +41,5 @@ def cropping():
 #     plt.tight_layout()
 #     plt.savefig('/home/ans5k/work/CarND-Behavioral-Cloning-P3/writeup/input_images.png', bbox_inches='tight')
     
-cropping()
+#cropping()
+data_distribution()
