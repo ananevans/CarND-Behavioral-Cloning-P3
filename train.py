@@ -19,13 +19,13 @@ def train(model, filename, track1, side_cameras, use_generators,epochs):
         model.fit(X_data, y_data, validation_split=0.2, shuffle=True, epochs=epochs)
     if track1:
         if side_cameras:
-            name = filename + '_track1_sides'
+            name = filename + '_track1_sides.h5'
         else:
-            name = filename + '_track1'
+            name = filename + '_track1.h5'
     else:
         if side_cameras:
-            name = filename + '_all_sides'
+            name = filename + '_all_sides.h5'
         else:
-            name = filename + '_all'
+            name = filename + '_all.h5'
 
     model.save(name)
