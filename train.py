@@ -8,8 +8,8 @@ def train(model, filename, track1, side_cameras, use_generators,epochs):
 
         train_samples, validation_samples = train_test_split(samples, test_size=0.2)
     
-        train_generator = data.generator(train_samples, batch_size=100000)
-        validation_generator = data.generator(validation_samples, batch_size=100000)
+        train_generator = data.generator(train_samples, batch_size=10000)
+        validation_generator = data.generator(validation_samples, batch_size=10000)
     
         model.fit_generator(train_generator, samples_per_epoch = len(train_samples), 
                         validation_data=validation_generator,

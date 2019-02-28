@@ -24,10 +24,10 @@ def load_data(track1, side_cameras):
                 if side_cameras:
                     # left camera
                     result.append((get_filename(line[1], dir), False, (angle + correction)))
-                    result.append((get_filename(line[1], dir), True, -(angle + correction)))
+                    #result.append((get_filename(line[1], dir), True, -(angle + correction)))
                     # right camera
                     result.append((get_filename(line[2], dir), False, (angle - correction)))
-                    result.append((get_filename(line[2], dir), True, -(angle - correction)))
+                    #result.append((get_filename(line[2], dir), True, -(angle - correction)))
     return np.array(result)
 
 
