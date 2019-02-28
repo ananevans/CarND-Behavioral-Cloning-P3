@@ -3,7 +3,7 @@ import train
 import numpy as np
             
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda, Conv2D, MaxPooling2D, Cropping2D, BatchNormalization
+from keras.layers import Flatten, Dense, Lambda, Conv2D, MaxPooling2D, Cropping2D, BatchNormalization, Dropout
 
 import tensorflow as tf
 tf.Session(config=tf.ConfigProto(log_device_placement=True))
