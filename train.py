@@ -17,6 +17,10 @@ def train(model, filename, track1, side_cameras, use_generators,epochs):
     else:
         X_data, y_data = data.load_images(samples)
         model.fit(X_data, y_data, validation_split=0.2, shuffle=True, epochs=epochs)
+    # print last layer
+    print( model.layers[-1].get_weights() )
+
+    #save model
     if track1:
         if side_cameras:
             name = filename + '_track1_sides.h5'
@@ -27,5 +31,6 @@ def train(model, filename, track1, side_cameras, use_generators,epochs):
             name = filename + '_all_sides.h5'
         else:
             name = filename + '_all.h5'
+
 
     model.save(name)
