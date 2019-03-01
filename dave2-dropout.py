@@ -18,7 +18,7 @@ def dave2():
 
     model.add(Lambda(lambda x: (x / 255.0) - 0.5))
 
-    model.add(BatchNormalization(input_shape=(160-55-20,320,3)))
+    #model.add(BatchNormalization(input_shape=(160-55-20,320,3)))
     
     
     model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
