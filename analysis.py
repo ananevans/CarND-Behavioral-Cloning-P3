@@ -8,9 +8,9 @@ def data_distribution():
     y_train = samples[:,2]
     print(y_train.shape)
     y_train = y_train.astype(float)
-    print(y_train)
+    print(y_train.shape[0] - np.count_nonzero(y_train, 0))
  
-    plt.hist(y_train, bins=[-1,-0.7,-0.5,-0.3,-0.1,0.1,0.3,0.5,0.7,1])
+    plt.hist(y_train, bins=25)
     plt.show()
 
 def cropping():
