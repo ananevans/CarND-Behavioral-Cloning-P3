@@ -65,7 +65,6 @@ def load_images(samples):
     images = []
     angles = []
     for image_name, flip, angle in samples:
-        print(image_name)
         angle = float(angle)
         flip = bool(flip)
         image = cv.imread(image_name)
