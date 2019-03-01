@@ -15,6 +15,7 @@ def train(model, filename, track1, side_cameras, use_generators,epochs):
                         validation_data=validation_generator,
                         nb_val_samples=len(validation_samples), nb_epoch=5)
     else:
+        print("NO GENERATORS")
         X_data, y_data = data.load_images(samples)
         model.fit(X_data, y_data, validation_split=0.2, shuffle=True, epochs=epochs)
     # print last layer

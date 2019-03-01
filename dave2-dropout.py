@@ -14,22 +14,22 @@ side_cameras = True
 def dave2():
     model = Sequential()
     # cropping
-    model.add(Cropping2D(cropping=((55,20), (0,0)), input_shape=(160,320,3)))
+    model.add(Cropping2D(cropping=((60,20), (0,0)), input_shape=(160,320,3)))
 
-    model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(160,320,3)))
+    model.add(Lambda(lambda x: (x / 255.0) - 0.5))
 
     #model.add(BatchNormalization(input_shape=(160-55-20,320,3)))
     
     
-    model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="elu", padding="valid"))
+    model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
-    model.add(Conv2D(36, (5, 5), strides=(2, 2), activation="elu", padding="valid"))
+    model.add(Conv2D(36, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
-    model.add(Conv2D(48, (5, 5), strides=(2, 2), activation="elu", padding="valid"))
+    model.add(Conv2D(48, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
-    model.add(Conv2D(64, (3, 3), activation="elu", padding="valid"))
+    model.add(Conv2D(64, (3, 3), activation="relu", padding="valid"))
     
-    model.add(Conv2D(64, (3, 3), activation="elu", padding="valid"))
+    model.add(Conv2D(64, (3, 3), activation="relu", padding="valid"))
     
     # flatten
     model.add(Flatten())

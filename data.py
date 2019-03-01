@@ -9,29 +9,31 @@ data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 
 def load_data(track1, side_cameras):
     if track1:
-        #data_dirs = glob.glob(data_home + 'track1_mouse*')
-        data_dirs = glob.glob(data_home + 'track1_data*')
+        data_dirs = glob.glob(data_home + 'track1*')
+        #data_dirs = glob.glob(data_home + 'track1_data*')
     else:
-        #data_dirs = glob.glob(data_home + '*mouse*')
-        data_dirs = glob.glob(data_home + 'track1_data*')
+        data_dirs = glob.glob(data_home + '*')
+        #data_dirs = glob.glob(data_home + 'track1_data*')
     result = []
     for dir in data_dirs:
         with open(dir + '/driving_log.csv') as csvfile:
             reader = csv.reader(csvfile)
             for line in reader:
                 angle = float(line[3])
-                correction = random.uniform(1.9,0.26)
-                # center camera
-                result.append((get_filename(line[0], dir), False, angle))
-                if abs(angle) > 0.0:
-                    result.append((get_filename(line[0], dir), True, -angle))
-                if side_cameras:
-                    # left camera
-                    result.append((get_filename(line[1], dir), False, (angle + correction)))
-                    result.append((get_filename(line[1], dir), True, -(angle + correction)))
-                    # right camera
-                    result.append((get_filename(line[2], dir), False, (angle - correction)))
-                    result.append((get_filename(line[2], dir), True, -(angle - correction)))
+                correction = 0.2
+                keep = random.uniform(0.0,1.0)
+                if abs(angle) > 0.1 or keep < 0.3:
+                    # center camera
+                    result.append((get_filename(line[0], dir), False, angle))
+                    if abs(angle) > 0.1:
+                        result.append((get_filename(line[0], dir), True, -angle))
+                        if side_cameras:
+                            # left camera
+                            result.append((get_filename(line[1], dir), False, (angle + correction)))
+                            result.append((get_filename(line[1], dir), True, -(angle + correction)))
+                            # right camera
+                            result.append((get_filename(line[2], dir), False, (angle - correction)))
+                            result.append((get_filename(line[2], dir), True, -(angle - correction)))
     return np.array(result)
 
 
@@ -48,6 +50,7 @@ def generator(samples, batch_size=10000):
                 angle = float(angle)
                 flip = bool(flip)
                 image = cv.imread(image_name)
+                image = cv.cvtColor(image, cv.cv2.COLOR_BGR2YUV)
                 if flip:
                     images.append(np.flip(image,1))
                 else:
@@ -62,9 +65,11 @@ def load_images(samples):
     images = []
     angles = []
     for image_name, flip, angle in samples:
+        print(image_name)
         angle = float(angle)
         flip = bool(flip)
         image = cv.imread(image_name)
+        image = cv.cvtColor(image, cv.cv2.COLOR_BGR2YUV)
         if flip:
             images.append(np.flip(image,1))
         else:
