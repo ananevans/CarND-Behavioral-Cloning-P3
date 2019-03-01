@@ -16,34 +16,34 @@ def dave2():
     # normalization
     model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(160,320,3)))
     # cropping
-    model.add(Cropping2D(cropping=((55,20), (0,0)), input_shape=(160,320,3)))
+    model.add(Cropping2D(cropping=((60,20), (0,0))))
 
     #model.add(BatchNormalization(input_shape=(160,320,3)))
     
-    model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="elu", padding="valid"))
+    model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
-    model.add(Conv2D(36, (5, 5), strides=(2, 2), activation="elu", padding="valid"))
+    model.add(Conv2D(36, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
-    model.add(Conv2D(48, (5, 5), strides=(2, 2), activation="elu", padding="valid"))
+    model.add(Conv2D(48, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
-    model.add(Conv2D(64, (3, 3), activation="elu", padding="valid"))
+    model.add(Conv2D(64, (3, 3), activation="relu", padding="valid"))
     
-    model.add(Conv2D(64, (3, 3), activation="elu", padding="valid"))
+    model.add(Conv2D(64, (3, 3), activation="relu", padding="valid"))
     
     # flatten
     model.add(Flatten())
     
     # dense 1164
-    model.add(Dense(1164, activation="elu"))
+    model.add(Dense(1164))
         
     # dense 100
-    model.add(Dense(100, activation="elu"))
+    model.add(Dense(100))
     
     # dense 50
-    model.add(Dense(50, activation="elu"))
+    model.add(Dense(50))
     
     # dense 10
-    model.add(Dense(10, activation="elu"))
+    model.add(Dense(10))
     
     # dense 1
     model.add(Dense(1))
