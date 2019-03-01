@@ -21,7 +21,7 @@ def load_data(track1, side_cameras):
                 correction = random.uniform(1.9,0.26)
                 # center camera
                 result.append((get_filename(line[0], dir), False, angle))
-                if abs(angle) > 0.05:
+                if abs(angle) > 0.1:
                     result.append((get_filename(line[0], dir), True, -angle))
                 if side_cameras:
                     # left camera
