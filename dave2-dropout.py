@@ -47,7 +47,7 @@ def dave2():
     model.add(Dropout(0.2))
     
     # dense 10
-    model.add(Dense(10, activation="elu"))
+    model.add(Dense(10))
     model.add(Dropout(0.2))
     
     # dense 1
