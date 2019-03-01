@@ -9,15 +9,16 @@ data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 
 def load_data(track1, side_cameras):
     if track1:
-        data_dirs = glob.glob(data_home + 'track1_mouse*')
+        #data_dirs = glob.glob(data_home + 'track1_mouse*')
+        data_dirs = glob.glob(data_home + 'track1_data*')
     else:
-        data_dirs = glob.glob(data_home + '*mouse*')
+        #data_dirs = glob.glob(data_home + '*mouse*')
+        data_dirs = glob.glob(data_home + 'track1_data*')
     result = []
     for dir in data_dirs:
         with open(dir + '/driving_log.csv') as csvfile:
             reader = csv.reader(csvfile)
             for line in reader:
-                print(line)
                 angle = float(line[3])
                 correction = random.uniform(1.9,0.26)
                 # center camera
