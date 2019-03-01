@@ -14,18 +14,18 @@ side_cameras = True
 def dave2():
     model = Sequential()
     # cropping
-    #model.add(Cropping2D(cropping=((55,20), (0,0)), input_shape=(160,320,3)))
+    model.add(Cropping2D(cropping=((55,20), (0,0)), input_shape=(160,320,3)))
 
     model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(160,320,3)))
 
     #model.add(BatchNormalization(input_shape=(160-55-20,320,3)))
     
     
-    model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="elu", padding="valid"))
+    model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
-    model.add(Conv2D(36, (5, 5), strides=(2, 2), activation="elu", padding="valid"))
+    model.add(Conv2D(36, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
-    model.add(Conv2D(48, (5, 5), strides=(2, 2), activation="elu", padding="valid"))
+    model.add(Conv2D(48, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
     model.add(Conv2D(64, (3, 3), activation="relu", padding="valid"))
     
@@ -35,15 +35,15 @@ def dave2():
     model.add(Flatten())
     
     # dense 1164
-    model.add(Dense(1164, activation="elu"))
+    model.add(Dense(1164))
     model.add(Dropout(0.2))
         
     # dense 100
-    model.add(Dense(100, activation="elu"))
+    model.add(Dense(100))
     model.add(Dropout(0.2))
     
     # dense 50
-    model.add(Dense(50, activation="elu"))
+    model.add(Dense(50))
     model.add(Dropout(0.2))
     
     # dense 10
