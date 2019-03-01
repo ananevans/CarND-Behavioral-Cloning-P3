@@ -35,19 +35,19 @@ def dave2():
     model.add(Flatten())
     
     # dense 1164
-    model.add(Dense(1164))
+    model.add(Dense(1164, activation="elu"))
     model.add(Dropout(0.2))
         
     # dense 100
-    model.add(Dense(100))
+    model.add(Dense(100, activation="elu"))
     model.add(Dropout(0.2))
     
     # dense 50
-    model.add(Dense(50))
+    model.add(Dense(50, activation="elu"))
     model.add(Dropout(0.2))
     
     # dense 10
-    model.add(Dense(10))
+    model.add(Dense(10, activation="elu"))
     model.add(Dropout(0.2))
     
     # dense 1
