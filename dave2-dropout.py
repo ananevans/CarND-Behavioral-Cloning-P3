@@ -16,7 +16,7 @@ def dave2():
     # cropping
     #model.add(Cropping2D(cropping=((55,20), (0,0)), input_shape=(160,320,3)))
 
-    model.add(Lambda(lambda x: (x / 255.0) - 0.5))
+    model.add(Lambda(lambda x: (x / 255.0) - 0.5), input_shape=(160,320,3))
 
     #model.add(BatchNormalization(input_shape=(160-55-20,320,3)))
     
