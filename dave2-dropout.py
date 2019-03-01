@@ -59,7 +59,7 @@ def dave2():
     
     return model
 
-train.train( dave2(), 'dave2-dropout', True, True, False, 5)
-train.train( dave2(), 'dave2-dropout', True, False, False, 5)
-train.train( dave2(), 'dave2-dropout', False, True, False, 5)
-train.train( dave2(), 'dave2-dropout', False, False, False, 5)
+train.train( dave2(), 'dave2-dropout', True, True, False, 50)
+train.train( dave2(), 'dave2-dropout', True, False, False, 50)
+train.train( dave2(), 'dave2-dropout', False, True, False, 50)
+train.train( dave2(), 'dave2-dropout', False, False, False, 50)
