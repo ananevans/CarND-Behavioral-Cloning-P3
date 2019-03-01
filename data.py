@@ -9,9 +9,9 @@ data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 
 def load_data(track1, side_cameras):
     if track1:
-        data_dirs = glob.glob(data_home + 'track1*')
+        data_dirs = glob.glob(data_home + 'track1_mouse*')
     else:
-        data_dirs = glob.glob(data_home + '*')
+        data_dirs = glob.glob(data_home + '*mouse*')
     result = []
     for dir in data_dirs:
         with open(dir + '/driving_log.csv') as csvfile:
