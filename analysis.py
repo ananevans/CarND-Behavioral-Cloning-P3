@@ -21,7 +21,7 @@ def cropping():
     cropped_left = left[60:140,:]
     cropped_right = right[60:140,:]
     
-    gs = gridspec.GridSpec(3,3)
+    gs = gridspec.GridSpec(4,3)
     plt.subplot(gs[0, 0]).imshow(center)
     plt.subplot(gs[0, 1]).imshow(left)
     plt.subplot(gs[0, 2]).imshow(right)
@@ -31,6 +31,9 @@ def cropping():
     plt.subplot(gs[2, 0]).imshow(np.flip(center,1))
     plt.subplot(gs[2, 1]).imshow(np.flip(left,1))
     plt.subplot(gs[2, 2]).imshow(np.flip(right,1))
+    plt.subplot(gs[3, 0]).imshow(data.brightness(center))
+    plt.subplot(gs[3, 1]).imshow(data.blurr1(center))
+    plt.subplot(gs[3, 2]).imshow(data.blurr2(center))
     plt.tight_layout()
     plt.savefig('/home/ans5k/work/CarND-Behavioral-Cloning-P3/writeup/input_images.png', bbox_inches='tight')
 
@@ -45,5 +48,5 @@ def cropping():
 #     plt.tight_layout()
 #     plt.savefig('/home/ans5k/work/CarND-Behavioral-Cloning-P3/writeup/input_images.png', bbox_inches='tight')
     
-#cropping()
-data_distribution()
+cropping()
+#data_distribution()

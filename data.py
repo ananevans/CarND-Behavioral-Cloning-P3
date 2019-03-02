@@ -4,12 +4,11 @@ import cv2 as cv
 import random
 import glob
 
-#data_home = '/home/nora/work/CarND-Behavioral-Cloning-P3/data/'
 data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 
 def load_data(track1, side_cameras):
     if track1:
-        data_dirs = glob.glob(data_home + 'track1*')
+        data_dirs = glob.glob(data_home + '*track1*')
         #data_dirs = glob.glob(data_home + 'track1_data*')
     else:
         data_dirs = glob.glob(data_home + '*')
@@ -37,12 +36,26 @@ def load_data(track1, side_cameras):
     return np.array(result)
 
 
+def brightness(image):
+    new_image = cv.cvtColor(image, cv.COLOR_RGB2HLS)
+    alpha = random.uniform(0.5, 1.5)
+    new_image[:,:,1] = new_image[:,:,1] * alpha 
+    new_image[:,:,1][new_image[:,:,1]>255] = 255
+    return cv.cvtColor(new_image, cv.COLOR_HLS2RGB)
+
+def blurr1(image):
+    return cv.GaussianBlur(image,(5,5),0)
+
+def blurr2(image):
+    return cv.medianBlur(image,5)
+
+
 import sklearn.utils
-def generator(samples, batch_size=10000):
+def generator(samples, batch_size=100):
     num_samples = len(samples)
     while 1: # Loop forever so the generator never terminates
         samples = sklearn.utils.shuffle(samples)
-        for offset in range(0, num_samples, batch_size):
+        for offset in range(0, num_samples, batch_size/5):
             batch_samples = samples[offset:offset+batch_size]
             images = []
             angles = []
@@ -50,11 +63,17 @@ def generator(samples, batch_size=10000):
                 angle = float(angle)
                 flip = bool(flip)
                 image = cv.imread(image_name)
-                image = cv.cvtColor(image, cv.cv2.COLOR_BGR2YUV)
                 if flip:
-                    images.append(np.flip(image,1))
-                else:
-                    images.append(image)
+                    image = np.flip(image,1)
+                images.append(cv.cvtColor(image, cv.cv2.COLOR_BGR2YUV))
+                angles.append(np.float(angle))
+                images.append(cv.cvtColor(brightness(image), cv.cv2.COLOR_BGR2YUV))
+                angles.append(np.float(angle))
+                images.append(cv.cvtColor(brightness(image), cv.cv2.COLOR_BGR2YUV))
+                angles.append(np.float(angle))
+                images.append(cv.cvtColor(blurr1(image), cv.cv2.COLOR_BGR2YUV))
+                angles.append(np.float(angle))
+                images.append(cv.cvtColor(blurr2(image), cv.cv2.COLOR_BGR2YUV))
                 angles.append(np.float(angle))
             X_train = np.array(images)
             y_train = np.array(angles)
