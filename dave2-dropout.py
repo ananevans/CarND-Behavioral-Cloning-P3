@@ -39,11 +39,7 @@ def dave2():
     
     # flatten
     model.add(Flatten())
-    
-    # dense 1164
-    #model.add(Dense(1164))
-    #model.add(Dropout(0.2))
-        
+
     # dense 100
     model.add(Dense(100))
     model.add(Dropout(0.2))
