@@ -34,7 +34,7 @@ def dave2():
     model.add(Flatten())
     
     # dense 1164
-    model.add(Dense(1164))
+    #model.add(Dense(1164))
         
     # dense 100
     model.add(Dense(100))
@@ -54,7 +54,7 @@ def dave2():
     
     return model
 
-train.train( dave2(), 'dave2', True, True, False, 10)
-train.train( dave2(), 'dave2', True, False, False, 10)
-train.train( dave2(), 'dave2', False, True, False, 10)
-train.train( dave2(), 'dave2', False, False, False, 10)
+train.train( dave2(), 'dave2', True, True, True, 10)
+train.train( dave2(), 'dave2', True, False, True, 10)
+train.train( dave2(), 'dave2', False, True, True, 10)
+train.train( dave2(), 'dave2', False, False, True, 10)

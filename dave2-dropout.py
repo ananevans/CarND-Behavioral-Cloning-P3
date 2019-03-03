@@ -41,8 +41,8 @@ def dave2():
     model.add(Flatten())
     
     # dense 1164
-    model.add(Dense(1164))
-    model.add(Dropout(0.2))
+    #model.add(Dense(1164))
+    #model.add(Dropout(0.2))
         
     # dense 100
     model.add(Dense(100))
@@ -65,7 +65,7 @@ def dave2():
     
     return model
 
-train.train( dave2(), 'dave2-dropout', True, True, True, 100)
-train.train( dave2(), 'dave2-dropout', True, False, True, 100)
-train.train( dave2(), 'dave2-dropout', False, True, True, 100)
-train.train( dave2(), 'dave2-dropout', False, False, True, 100)
+train.train( dave2(), 'dave2-dropout', True, True, True, 10)
+train.train( dave2(), 'dave2-dropout', True, False, True, 10)
+train.train( dave2(), 'dave2-dropout', False, True, True, 10)
+train.train( dave2(), 'dave2-dropout', False, False, True, 10)
