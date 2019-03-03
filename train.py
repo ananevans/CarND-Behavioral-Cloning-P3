@@ -6,21 +6,16 @@ def train(model, filename, track1, side_cameras, use_generators,epochs):
     
     if use_generators:
 
-        train_samples, validation_samples = train_test_split(samples, test_size=0.2)
-    
+        train_samples, validation_samples = train_test_split(samples, test_size=0.1)
         train_generator = data.generator(train_samples, batch_size = 100)
         validation_generator = data.generator(validation_samples, batch_size = 100)
-    
         model.fit_generator(train_generator, steps_per_epoch = 5*len(train_samples)/100, 
-                        validation_data=validation_generator,
-                        validation_steps=5*len(validation_samples)/100, epochs=5)
+                            validation_data=validation_generator,
+                            validation_steps=5*len(validation_samples)/100, epochs=epochs)
     else:
         print("NO GENERATORS")
         X_data, y_data = data.load_images(samples)
-        model.fit(X_data, y_data, validation_split=0.2, shuffle=True, epochs=epochs)
-    # print last layer
-    print( model.layers[-1].get_weights() )
-
+        model.fit(X_data, y_data, validation_split=0.1, shuffle=True, epochs=epochs)
     #save model
     if track1:
         if side_cameras:
@@ -32,6 +27,4 @@ def train(model, filename, track1, side_cameras, use_generators,epochs):
             name = filename + '_all_sides.h5'
         else:
             name = filename + '_all.h5'
-
-
     model.save(name)

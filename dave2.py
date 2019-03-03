@@ -48,13 +48,13 @@ def dave2():
     # dense 1
     model.add(Dense(1))
     
-    model.compile(loss="mse", optimizer='adam')
+    model.compile(loss="mse", optimizer='adam', metrics=['accuracy'])
     
     print(model.summary())
     
     return model
 
-train.train( dave2(), 'dave2', True, True, True, 100)
-train.train( dave2(), 'dave2', True, False, True, 100)
-train.train( dave2(), 'dave2', False, True, True, 100)
-train.train( dave2(), 'dave2', False, False, True, 100)
+train.train( dave2(), 'dave2', True, True, False, 10)
+train.train( dave2(), 'dave2', True, False, False, 10)
+train.train( dave2(), 'dave2', False, True, False, 10)
+train.train( dave2(), 'dave2', False, False, False, 10)
