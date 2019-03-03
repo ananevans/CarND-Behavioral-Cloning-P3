@@ -54,7 +54,7 @@ def dave2():
     
     return model
 
-train.train( dave2(), 'dave2', True, True, False, 5)
-train.train( dave2(), 'dave2', True, False, False, 5)
-train.train( dave2(), 'dave2', False, True, False, 5)
-train.train( dave2(), 'dave2', False, False, False, 5)
+train.train( dave2(), 'dave2', True, True, True, 100)
+train.train( dave2(), 'dave2', True, False, True, 100)
+train.train( dave2(), 'dave2', False, True, True, 100)
+train.train( dave2(), 'dave2', False, False, True, 100)
