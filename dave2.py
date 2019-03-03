@@ -16,7 +16,7 @@ def dave2():
     # normalization
     model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(160,320,3)))
     # cropping
-    model.add(Cropping2D(cropping=((60,20), (0,0))))
+    model.add(Cropping2D(cropping=((70,25), (0,0))))
 
     #model.add(BatchNormalization(input_shape=(160,320,3)))
     
@@ -51,7 +51,7 @@ def dave2():
     
     return model
 
-train.train( dave2(), 'dave2', True, True, False, 5)
-train.train( dave2(), 'dave2', True, False, False, 5)
 train.train( dave2(), 'dave2', False, True, False, 5)
 train.train( dave2(), 'dave2', False, False, False, 5)
+train.train( dave2(), 'dave2', True, True, False, 5)
+train.train( dave2(), 'dave2', True, False, False, 5)

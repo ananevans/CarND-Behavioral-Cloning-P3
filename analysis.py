@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
-def data_distribution():
-    samples = data.load_data(False, True)
+def data_distribution(keep_straight_rate):
+    samples = data.load_data(False, True,keep_straight_rate=keep_straight_rate)
     y_train = samples[:,2]
     print(y_train.shape)
     y_train = y_train.astype(float)
@@ -49,4 +49,4 @@ def cropping():
 #     plt.savefig('/home/ans5k/work/CarND-Behavioral-Cloning-P3/writeup/input_images.png', bbox_inches='tight')
     
 #cropping()
-data_distribution()
+data_distribution(1.0)

@@ -6,7 +6,7 @@ import glob
 
 data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 
-def load_data(track1, side_cameras):
+def load_data(track1, side_cameras, keep_straight_rate = 1.0):
     if track1:
         data_dirs = glob.glob(data_home + '*track1*')
         #data_dirs = glob.glob(data_home + 'track1_data*')
@@ -17,18 +17,21 @@ def load_data(track1, side_cameras):
     for dir in data_dirs:
         with open(dir + '/driving_log.csv') as csvfile:
             reader = csv.reader(csvfile)
+            keep = random.uniform(0.0,1.0)
             for line in reader:
                 angle = float(line[3])
                 correction = 0.2
-                result.append((get_filename(line[0], dir), False, angle))
-                result.append((get_filename(line[0], dir), True, -angle))
-                if side_cameras:
-                    # left camera
-                    result.append((get_filename(line[1], dir), False, (angle + correction)))
-                    result.append((get_filename(line[1], dir), True, -(angle + correction)))
-                    # right camera
-                    result.append((get_filename(line[2], dir), False, (angle - correction)))
-                    result.append((get_filename(line[2], dir), True, -(angle - correction)))
+                
+                if abs(angle) > 0.1 or keep <= keep_straight_rate:
+                    result.append((get_filename(line[0], dir), False, angle))
+                    result.append((get_filename(line[0], dir), True, -angle))                
+                    if side_cameras:
+                        # left camera
+                        result.append((get_filename(line[1], dir), False, (angle + correction)))
+                        result.append((get_filename(line[1], dir), True, -(angle + correction)))
+                        # right camera
+                        result.append((get_filename(line[2], dir), False, (angle - correction)))
+                        result.append((get_filename(line[2], dir), True, -(angle - correction)))
     return np.array(result)
 
 
@@ -85,7 +88,7 @@ def load_images(samples):
         angle = float(angle)
         flip = bool(flip)
         image = cv.imread(image_name)
-        image = cv.cvtColor(image, cv.COLOR_BGR2YUV)
+        image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
         if flip:
             images.append(np.flip(image,1))
         else:
