@@ -20,7 +20,7 @@ def load_data(track1, side_cameras, keep_straight_rate = 1.0):
             keep = random.uniform(0.0,1.0)
             for line in reader:
                 angle = float(line[3])
-                correction = 0.2
+                correction = 0.1
                 
                 if abs(angle) > 0.1 or keep <= keep_straight_rate:
                     result.append((get_filename(line[0], dir), False, angle))
@@ -74,7 +74,6 @@ def generator(samples, batch_size=100):
                 angles.append(np.float(angle))
                 images.append(cv.cvtColor(blurr2(image), cv.COLOR_BGR2YUV))
                 angles.append(np.float(angle))
-            #print("Generator offset=", offset, "images=", len(images))
             X_train = np.array(images)
             y_train = np.array(angles)
             yield (X_train, y_train)
@@ -104,17 +103,3 @@ def load_images(samples):
 def get_filename(path,dir):
     filename = path.split('/')[-1]
     return (dir + '/IMG/' + filename)
-
-# def load_images(files):
-#     X_train = []
-#     for filename in files:
-#         X_train.append(cv.imread(filename))
-#     return np.array(X_train)
-# 
-# def flip_images(images, measurements):
-#     new_images = np.copy(images)
-#     new_measurements = np.copy(measurements)
-#     for i in range(new_images.shape[0]):
-#         new_images[i] = np.flip(images[i],1)
-#         new_measurements[i] = -measurements[i]
-#     return (new_images, new_measurements) 
