@@ -79,6 +79,7 @@ def generator(samples, batch_size=100):
             y_train = np.array(angles)
             yield (X_train, y_train)
 
+
                 
 def load_images(samples):
     images = []
