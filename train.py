@@ -11,9 +11,9 @@ def train(model, filename, track1, side_cameras, use_generators,epochs):
         train_generator = data.generator(train_samples, batch_size = 100)
         validation_generator = data.generator(validation_samples, batch_size = 100)
     
-        model.fit_generator(train_generator, samples_per_epoch = 5*len(train_samples)/100, 
+        model.fit_generator(train_generator, steps_per_epoch = 5*len(train_samples)/100, 
                         validation_data=validation_generator,
-                        nb_val_samples=5*len(validation_samples)/100, nb_epoch=5)
+                        validation_steps=5*len(validation_samples)/100, epochs=5)
     else:
         print("NO GENERATORS")
         X_data, y_data = data.load_images(samples)
