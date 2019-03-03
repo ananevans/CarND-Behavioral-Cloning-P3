@@ -56,7 +56,7 @@ def generator(samples, batch_size=100):
     while 1: # Loop forever so the generator never terminates
         samples = sklearn.utils.shuffle(samples)
         for offset in range(0, num_samples, int(batch_size/5)):
-            batch_samples = samples[offset:offset+(batch_size/5)]
+            batch_samples = samples[offset:offset+int(batch_size/5)]
             images = []
             angles = []
             for image_name, flip, angle in batch_samples:
