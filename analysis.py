@@ -8,7 +8,7 @@ def data_distribution():
     y_train = samples[:,2]
     print(y_train.shape)
     y_train = y_train.astype(float)
-    print(y_train)
+    print(y_train.shape)
  
     plt.hist(y_train, bins=21)
     plt.show()
@@ -48,5 +48,5 @@ def cropping():
 #     plt.tight_layout()
 #     plt.savefig('/home/ans5k/work/CarND-Behavioral-Cloning-P3/writeup/input_images.png', bbox_inches='tight')
     
-cropping()
-#data_distribution()
+#cropping()
+data_distribution()

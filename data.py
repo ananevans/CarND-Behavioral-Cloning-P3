@@ -75,6 +75,7 @@ def generator(samples, batch_size=100):
                 angles.append(np.float(angle))
                 images.append(cv.cvtColor(blurr2(image), cv.cv2.COLOR_BGR2YUV))
                 angles.append(np.float(angle))
+            print("Generator offset=", offset, "images=", len(images))
             X_train = np.array(images)
             y_train = np.array(angles)
             yield (X_train, y_train)
