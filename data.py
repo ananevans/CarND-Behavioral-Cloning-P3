@@ -20,19 +20,15 @@ def load_data(track1, side_cameras):
             for line in reader:
                 angle = float(line[3])
                 correction = 0.2
-                keep = 1.0#random.uniform(0.0,1.0)
-                if abs(angle) > 0.1 or keep < 0.3:
-                    # center camera
-                    result.append((get_filename(line[0], dir), False, angle))
-                    if abs(angle) > 0.1:
-                        result.append((get_filename(line[0], dir), True, -angle))
-                        if side_cameras:
-                            # left camera
-                            result.append((get_filename(line[1], dir), False, (angle + correction)))
-                            result.append((get_filename(line[1], dir), True, -(angle + correction)))
-                            # right camera
-                            result.append((get_filename(line[2], dir), False, (angle - correction)))
-                            result.append((get_filename(line[2], dir), True, -(angle - correction)))
+                result.append((get_filename(line[0], dir), False, angle))
+                result.append((get_filename(line[0], dir), True, -angle))
+                if side_cameras:
+                    # left camera
+                    result.append((get_filename(line[1], dir), False, (angle + correction)))
+                    result.append((get_filename(line[1], dir), True, -(angle + correction)))
+                    # right camera
+                    result.append((get_filename(line[2], dir), False, (angle - correction)))
+                    result.append((get_filename(line[2], dir), True, -(angle - correction)))
     return np.array(result)
 
 
