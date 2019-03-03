@@ -20,7 +20,7 @@ def load_data(track1, side_cameras):
             for line in reader:
                 angle = float(line[3])
                 correction = 0.2
-                keep = random.uniform(0.0,1.0)
+                keep = 1.0#random.uniform(0.0,1.0)
                 if abs(angle) > 0.1 or keep < 0.3:
                     # center camera
                     result.append((get_filename(line[0], dir), False, angle))
