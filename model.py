@@ -17,7 +17,7 @@ data_dirs = glob.glob('/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/*')
 images = []
 angles = []
 data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
-data_dirs = glob.glob(data_home + '*')
+data_dirs = glob.glob(data_home + '*track1*')
 angle_adjustment = 0.1
 for dir in data_dirs:
     with open(dir + '/driving_log.csv') as csvfile:
