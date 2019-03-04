@@ -2,6 +2,7 @@ import glob
 import numpy as np
 import csv
 import cv2 as cv
+import dave2
             
 from keras.models import Sequential
 from keras.layers import Flatten, Dense, Lambda, Conv2D, Cropping2D
@@ -53,41 +54,7 @@ y_train = np.array(y_train)
 X_val = np.array(X_val)
 y_val = np.array(y_val)
 
-model = Sequential()
-# normalization
-model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(160,320,3)))
-# cropping
-model.add(Cropping2D(cropping=((70,25), (0,0))))
-
-model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
-    
-model.add(Conv2D(36, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
-    
-model.add(Conv2D(48, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
-    
-model.add(Conv2D(64, (3, 3), activation="relu", padding="valid"))
-    
-model.add(Conv2D(64, (3, 3), activation="relu", padding="valid"))
-    
-# flatten
-model.add(Flatten())
-        
-# dense 100
-model.add(Dense(100))
-    
-# dense 50
-model.add(Dense(50))
-    
-# dense 10
-model.add(Dense(10))
-    
-# dense 1
-model.add(Dense(1))
-    
-model.compile(loss="mse", optimizer='adam', metrics=['accuracy'])
-    
-print(model.summary())
-
+model = dave2.dave2()
 model.fit(X_train, y_train, validation_data = (X_val, y_val), nb_epoch=10, shuffle=True) 
 
 model.save('model.h5')
