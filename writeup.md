@@ -48,8 +48,6 @@ python drive.py model.h5
 
 #### 3. Submission code is usable and readable
 
-The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
-
 ### Model Architecture and Training Strategy
 
 #### 1. An appropriate model architecture has been employed
@@ -57,41 +55,51 @@ The model.py file contains the code for training and saving the convolution neur
 First, I used the nvidia dave-2 model:
 
 lambda_1 (Lambda)            (None, 160, 320, 3)       0         
-_________________________________________________________________
 cropping2d_1 (Cropping2D)    (None, 80, 320, 3)        0         
-_________________________________________________________________
 conv2d_1 (Conv2D)            (None, 38, 158, 24)       1824      
-_________________________________________________________________
 conv2d_2 (Conv2D)            (None, 17, 77, 36)        21636     
-_________________________________________________________________
 conv2d_3 (Conv2D)            (None, 7, 37, 48)         43248     
-_________________________________________________________________
 conv2d_4 (Conv2D)            (None, 5, 35, 64)         27712     
-_________________________________________________________________
 conv2d_5 (Conv2D)            (None, 3, 33, 64)         36928     
-_________________________________________________________________
 flatten_1 (Flatten)          (None, 6336)              0         
-_________________________________________________________________
 dense_1 (Dense)              (None, 100)               633700    
-_________________________________________________________________
 dense_2 (Dense)              (None, 50)                5050      
-_________________________________________________________________
 dense_3 (Dense)              (None, 10)                510       
-_________________________________________________________________
 dense_4 (Dense)              (None, 1)                 11        
 
 
 #### 2. Attempts to reduce overfitting in the model
 
-To reduce overfitting, I created a second model with a dropout layer after the first convolutional layer and after each fully-connected layer. I also added L2 regularization to all convolutional layers.
+To reduce overfitting, I created a second model with a dropout layer after the first convolutional layer and after each fully-connected layer. The rate for all the Dropout layers is 0.2. I also added L2 regularization with parameter 0.01 to all convolutional layers.
 
-The results of the experiments are presented in the table below:
+cropping2d_1 (Cropping2D)    (None, 80, 320, 3)        0         
+lambda_1 (Lambda)            (None, 80, 320, 3)        0         
+conv2d_1 (Conv2D)            (None, 38, 158, 24)       1824      
+dropout_1 (Dropout)          (None, 38, 158, 24)       0         
+conv2d_2 (Conv2D)            (None, 17, 77, 36)        21636     
+conv2d_3 (Conv2D)            (None, 7, 37, 48)         43248     
+conv2d_4 (Conv2D)            (None, 5, 35, 64)         27712     
+conv2d_5 (Conv2D)            (None, 3, 33, 64)         36928     
+flatten_1 (Flatten)          (None, 6336)              0         
+dense_1 (Dense)              (None, 100)               633700    
+dropout_2 (Dropout)          (None, 100)               0         
+dense_2 (Dense)              (None, 50)                5050      
+dropout_3 (Dropout)          (None, 50)                0         
+dense_3 (Dense)              (None, 10)                510       
+dropout_4 (Dropout)          (None, 10)                0         
+dense_4 (Dense)              (None, 1)                 11        
 
-----------------------------------------------------------------------------------------------
-| Model | Use Both Tracks | Use Side Cameras | Epochs | Training Data Size | Validation Data Size | Training Loss | Validation Loss |
-|----------------------------------------------------------------------------------------------|
-| Dave-2 | 
-|----------------------------------------------------------------------------------------------|
+#### 3. Results
+
+I trained all both models on four different data sets. First, I use only the data from the first track with and without side camera images. Second, I train on all the data with or without side camera images.
+
+I trained four Dave2 models for five epochs keeping all the data generated. 
+
+| Both Tracks | Side Cameras | Training   | Validation  |
+|-------------------------------------------------------|
+| No          | No           | 5*77515    | 5*19379     |
+|-------------------------------------------------------|
+
 
 
 #### 3. Model parameter tuning
