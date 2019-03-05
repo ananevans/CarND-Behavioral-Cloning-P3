@@ -53,8 +53,6 @@ The model.py file contains the code for training and saving the convolution neur
 
 First, I used the nvidia dave-2 model:
 
-Layer (type)                 Output Shape              Param #   
-=================================================================
 lambda_1 (Lambda)            (None, 160, 320, 3)       0         
 _________________________________________________________________
 cropping2d_1 (Cropping2D)    (None, 80, 320, 3)        0         
@@ -78,7 +76,6 @@ _________________________________________________________________
 dense_3 (Dense)              (None, 10)                510       
 _________________________________________________________________
 dense_4 (Dense)              (None, 1)                 11        
-=================================================================
 
 
 #### 2. Attempts to reduce overfitting in the model
