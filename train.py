@@ -6,7 +6,7 @@ def train(model, filename, track1, side_cameras, use_generators,epochs, keep_str
     
     if use_generators:
 
-        train_samples, validation_samples = train_test_split(samples, test_size=0.1)
+        train_samples, validation_samples = train_test_split(samples, test_size=0.2)
         print("Training", len(train_samples))
         print("Validation", len(validation_samples))
         batch_size = 100
@@ -18,7 +18,7 @@ def train(model, filename, track1, side_cameras, use_generators,epochs, keep_str
     else:
         print("NO GENERATORS")
         X_data, y_data = data.load_images(samples)
-        model.fit(X_data, y_data, validation_split=0.1, shuffle=True, epochs=epochs)
+        model.fit(X_data, y_data, validation_split=0.2, shuffle=True, epochs=epochs)
     #save model
     if track1:
         if side_cameras:
