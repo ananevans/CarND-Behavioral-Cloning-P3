@@ -20,7 +20,7 @@ def load_data(track1, side_cameras, keep_straight_rate = 1.0):
             keep = random.uniform(0.0,1.0)
             for line in reader:
                 angle = float(line[3])
-                correction = 0.1
+                correction = 0.2
                 if abs(angle) > 0.1 or keep <= keep_straight_rate:
                     result.append((get_filename(line[0], dir), False, angle))
                     result.append((get_filename(line[0], dir), True, -angle))                
@@ -66,15 +66,15 @@ def generator(samples, batch_size=100):
                 image = cv.imread(image_name)
                 if flip:
                     image = np.flip(image,1)
-                images.append(cv.cvtColor(image, cv.COLOR_BGR2RGB))
+                images.append(cv.cvtColor(image, cv.COLOR_BGR2YUV))
                 angles.append(np.float(angle))
-                images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2RGB))
+                images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2YUV))
                 angles.append(np.float(angle))
-                images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2RGB))
+                images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2YUV))
                 angles.append(np.float(angle))
-                images.append(cv.cvtColor(blurr1(image), cv.COLOR_BGR2RGB))
+                images.append(cv.cvtColor(blurr1(image), cv.COLOR_BGR2YUV))
                 angles.append(np.float(angle))
-                images.append(cv.cvtColor(blurr2(image), cv.COLOR_BGR2RGB))
+                images.append(cv.cvtColor(blurr2(image), cv.COLOR_BGR2YUV))
                 angles.append(np.float(angle))
             X_train = np.array(images)
             y_train = np.array(angles)
