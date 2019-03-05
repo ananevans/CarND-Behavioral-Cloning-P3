@@ -14,10 +14,10 @@ The goals / steps of this project are the following:
 
 [image1]: ./writeup/input_images.png "Original Images"
 [image2]: ./writeup/cropped_images.png "Cropped Images"
-[image3]: ./examples/flipped_images.png "Flipped Images"
-[image4]: ./examples/augmented_images.png "Augmented Images"
-[image5]: ./examples/hist0.5.png "Steering Angle Distribution Keeping Half of the Small Angles"
-[image6]: ./examples/hist1.0.png "Steering Angle Distribution"
+[image3]: ./writeup/flipped_images.png "Flipped Images"
+[image4]: ./writeup/augmented_images.png "Augmented Images"
+[image5]: ./writeup/hist0.5.png "Steering Angle Distribution Keeping Half of the Small Angles"
+[image6]: ./writeup/hist1.0.png "Steering Angle Distribution"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -99,7 +99,7 @@ Here is a visualization of the architecture (note: visualizing the architecture 
 
 #### 3. Creation of the Training Set & Training Process
 
-The dataset was generated using the provided simultor. First, I used the keyboard to control the car and I observed that the angles recorded were either very close to zero or to the maximum value (left and right). I scrapped all the data and then controlled the car using the mouse. 
+The dataset was generated using the provided simulator. First, I used the keyboard to control the car and I observed that the angles recorded were either very close to zero or to the maximum value (left and right). I scrapped all the data and then controlled the car using the mouse. 
 
 I recorded the following sets of data:
 * three laps driving around the first track
@@ -133,8 +133,6 @@ To reduce the number of angles very close to zero, I decided to keep only half o
 
 ![alt text][image5]
 
-
-
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
+I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
