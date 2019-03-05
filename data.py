@@ -3,7 +3,6 @@ import numpy as np
 import cv2 as cv
 import random
 import glob
-from builtins import True
 
 data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 
