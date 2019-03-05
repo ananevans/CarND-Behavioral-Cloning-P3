@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
 def data_distribution(keep_straight_rate):
-    samples = data.load_data(False, True,keep_straight_rate=keep_straight_rate)
+    samples = data.load_data(False, True, keep_straight_rate=keep_straight_rate)
     y_train = samples[:,2]
     print(y_train.shape)
     y_train = y_train.astype(float)

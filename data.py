@@ -3,6 +3,7 @@ import numpy as np
 import cv2 as cv
 import random
 import glob
+from builtins import True
 
 data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 
@@ -21,7 +22,6 @@ def load_data(track1, side_cameras, keep_straight_rate = 1.0):
             for line in reader:
                 angle = float(line[3])
                 correction = 0.1
-                
                 if abs(angle) > 0.1 or keep <= keep_straight_rate:
                     result.append((get_filename(line[0], dir), False, angle))
                     result.append((get_filename(line[0], dir), True, -angle))                
@@ -36,11 +36,11 @@ def load_data(track1, side_cameras, keep_straight_rate = 1.0):
 
 
 def brightness(image):
-    new_image = cv.cvtColor(image, cv.COLOR_RGB2HLS)
+    new_image = cv.cvtColor(image, cv.COLOR_BGR2HLS)
     alpha = random.uniform(0.5, 1.5)
     new_image[:,:,1] = new_image[:,:,1] * alpha 
     new_image[:,:,1][new_image[:,:,1]>255] = 255
-    return cv.cvtColor(new_image, cv.COLOR_HLS2RGB)
+    return cv.cvtColor(new_image, cv.COLOR_HLS2BGR)
 
 def blurr1(image):
     return cv.GaussianBlur(image,(5,5),0)
@@ -66,38 +66,38 @@ def generator(samples, batch_size=100):
                     image = np.flip(image,1)
                 images.append(cv.cvtColor(image, cv.COLOR_BGR2RGB))
                 angles.append(np.float(angle))
-                images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2YUV))
+                images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2RGB))
                 angles.append(np.float(angle))
-                images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2YUV))
+                images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2RGB))
                 angles.append(np.float(angle))
-                images.append(cv.cvtColor(blurr1(image), cv.COLOR_BGR2YUV))
+                images.append(cv.cvtColor(blurr1(image), cv.COLOR_BGR2RGB))
                 angles.append(np.float(angle))
-                images.append(cv.cvtColor(blurr2(image), cv.COLOR_BGR2YUV))
+                images.append(cv.cvtColor(blurr2(image), cv.COLOR_BGR2RGB))
                 angles.append(np.float(angle))
             X_train = np.array(images)
             y_train = np.array(angles)
             yield (X_train, y_train)
 
 
-                
 def load_images(samples):
     images = []
     angles = []
     for image_name, flip, angle in samples:
         angle = float(angle)
-        flip = bool(flip)
+        if flip == 'True':
+            flip = True
+        else:
+            flip = False
         image = cv.imread(image_name)
         image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
         if flip:
             images.append(np.flip(image,1))
         else:
             images.append(image)
-        angles.append(np.float(angle))
+        angles.append(angle)
     X_train = np.array(images)
     y_train = np.array(angles)
     return (X_train, y_train)
-
-                    
 
                     
 def get_filename(path,dir):
