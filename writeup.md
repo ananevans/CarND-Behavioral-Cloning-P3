@@ -27,16 +27,19 @@ The goals / steps of this project are the following:
 
 #### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
-TODO
-
 My project includes the following files:
-* model.py containing the script to create and train the model
-* drive.py for driving the car in autonomous mode
-* model.h5 containing a trained convolution neural network 
+* model.py containing the script to train the chosen model
+* drive.py for driving the car in autonomous mode (provided)
+* .h5 containing a trained convolution neural network 
 * writeup.md summarizing the results (this document)
+* data.py containing the script to load the images and the data augmentation
+* train.py containing the script to train a given convolutional network
+* dave2.py containing the Dave2 architecture and calls to train it
+* dave2_droput.py containing a modified Dave2 architecture and calls to train it
+* a recording of autonomous driving on the first track for both architectures
+* a recording of autonomous driving on the second track
 
 #### 2. Submission includes functional code
-TODO
 
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
