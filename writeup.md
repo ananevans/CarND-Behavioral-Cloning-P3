@@ -1,11 +1,5 @@
 # **Behavioral Cloning** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
----
-
 **Behavioral Cloning Project**
 
 The goals / steps of this project are the following:
@@ -18,13 +12,12 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
+[image1]: ./writeup/input_images.png "Original Images"
+[image2]: ./writeup/cropped_images.png "Cropped Images"
+[image3]: ./examples/flipped_images.png "Flipped Images"
+[image4]: ./examples/augmented_images.png "Augmented Images"
+[image5]: ./examples/hist0.5.png "Steering Angle Distribution Keeping Half of the Small Angles"
+[image6]: ./examples/hist1.0.png "Steering Angle Distribution"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -34,13 +27,17 @@ The goals / steps of this project are the following:
 
 #### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
+TODO
+
 My project includes the following files:
 * model.py containing the script to create and train the model
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
-* writeup_report.md or writeup_report.pdf summarizing the results
+* writeup.md summarizing the results (this document)
 
 #### 2. Submission includes functional code
+TODO
+
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
 python drive.py model.h5
@@ -102,26 +99,40 @@ Here is a visualization of the architecture (note: visualizing the architecture 
 
 #### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+The dataset was generated using the provided simultor. First, I used the keyboard to control the car and I observed that the angles recorded were either very close to zero or to the maximum value (left and right). I scrapped all the data and then controlled the car using the mouse. 
+
+I recorded the following sets of data:
+* three laps driving around the first track
+* three laps driving around the first track in the opposite direction
+* one lap driving around the second track
+* one lap driving around the second track in the opposite direction
+* carefully driving two-three times around the curves of both tracks in both directions
+* starting from an off-center position driving to the center
+
+Here is an example image of center lane driving recorded with the center, left and right cameras:
+
+![alt text][image1]
+
+To eliminate the irrelevant information, I cropped the pictures as suggested in the project directions. Here are the cropped images:
 
 ![alt text][image2]
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
+To augment the data sat, I also flipped images and angles if the angle is not very close to zero. For example, here is an image that has then been flipped:
 
 ![alt text][image3]
+
+I also augment the input data by radomly changing the brightness (file data.py, lines 37-42) and applying Gaussian (file data.py, line 45)  and median blurring(file data.py, line 48).
+
 ![alt text][image4]
-![alt text][image5]
 
-Then I repeated this process on track two in order to get more data points.
-
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
+Here is the distribution of the angle values:
 
 ![alt text][image6]
-![alt text][image7]
 
-Etc ....
+To reduce the number of angles very close to zero, I decided to keep only half of those values. Here is the new distribution:
 
-After the collection process, I had X number of data points. I then preprocessed this data by ...
+![alt text][image5]
+
 
 
 I finally randomly shuffled the data set and put Y% of the data into a validation set. 
