@@ -49,4 +49,4 @@ def cropping():
 #     plt.savefig('/home/ans5k/work/CarND-Behavioral-Cloning-P3/writeup/input_images.png', bbox_inches='tight')
     
 #cropping()
-data_distribution(1.0)
+data_distribution(0.5)

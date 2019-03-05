@@ -1,8 +1,8 @@
 import data
 from sklearn.model_selection import train_test_split
 
-def train(model, filename, track1, side_cameras, use_generators,epochs):
-    samples = data.load_data(track1, side_cameras)
+def train(model, filename, track1, side_cameras, use_generators,epochs, keep_straight_rate = 1.0):
+    samples = data.load_data(track1, side_cameras, keep_straight_rate=keep_straight_rate)
     
     if use_generators:
 
