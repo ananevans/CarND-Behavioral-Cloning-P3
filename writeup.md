@@ -96,9 +96,8 @@ I trained all both models on four different data sets. First, I use only the dat
 I trained four Dave2 models for five epochs keeping all the data generated. 
 
 | Both Tracks | Side Cameras | Training   | Validation  |
-|-------------------------------------------------------|
+| :---:       |    :----:    |       :--- |        :--- |
 | No          | No           | 5*77515    | 5*19379     |
-|-------------------------------------------------------|
 
 
 
