@@ -64,13 +64,13 @@ def generator(samples, batch_size=100, augment_data = True):
             images = []
             angles = []
             for image_name, flip, angle in batch_samples:
-                print(image_name, flip, angle)
+                #print(image_name, flip, angle)
                 angle = float(angle)
                 if flip == 'True':
                     flip = True
                 else:
                     flip = False
-                print(image_name, flip, angle)
+                #print(image_name, flip, angle)
                 image = cv.imread(image_name)
                 if flip:
                     image = np.flip(image,1)
