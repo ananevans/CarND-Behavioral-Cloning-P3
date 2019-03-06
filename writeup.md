@@ -111,7 +111,7 @@ The validation and training losses are:
 | No          | No           |  0.0039 |  0.1836   |
 | No          | Yes          |  0.0040  |  0.0039   |
 | Yes         | No           |  0.2345 |   0.2321  |
-| Yes         | Yes          |   |     |
+| Yes         | Yes          |  0.0097 |   0.0098  |
 
 
 I trained another four models using the modified Dave2 architecture keeping angles close to zero with probability 0.5, for twenty epochs.
@@ -120,7 +120,7 @@ I trained another four models using the modified Dave2 architecture keeping angl
 | :---:       |    :----:    |       :--- |        :--- |
 | No          | No           | 5*31,689   | 5*7,923    |
 | No          | Yes          | 5*95,068  |   5*23,768  |
-| Yes         | No           | 5*  |   5*  |
+| Yes         | No           | 5*55,665  |   5*13,917  |
 | Yes         | Yes          | 5*  |   5*  |
 
 The validation and training losses are:
@@ -128,7 +128,7 @@ The validation and training losses are:
 | Both Tracks | Side Cameras | Training Loss  | Validation Loss |
 | :---:       |    :----:    |       :--- |        :--- |
 | No          | No           |  0.0191 |  0.0192   |
-| No          | Yes          |   |     |
+| No          | Yes          |  0.0459 |   0.0458  |
 | Yes         | No           |   |     |
 | Yes         | Yes          |   |     |
 
