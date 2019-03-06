@@ -68,4 +68,4 @@ def augmetation():
 # augmetation()
 
 #data_distribution(1.0)
-data_distribution(0.5)
+data_distribution(0.3)

@@ -1,7 +1,6 @@
 import data
 from sklearn.model_selection import train_test_split
 
-augment_data = False
 
 def train(model, filename, track1, side_cameras, use_generators,epochs, keep_straight_rate = 1.0):
     samples = data.load_data(track1, side_cameras, keep_straight_rate=keep_straight_rate)
@@ -12,6 +11,8 @@ def train(model, filename, track1, side_cameras, use_generators,epochs, keep_str
         print("Training", len(train_samples))
         print("Validation", len(validation_samples))        
         batch_size = 100
+
+        augment_data = False
         
         if augment_data:
             train_generator = data.generator(train_samples, batch_size = batch_size)
