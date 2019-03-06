@@ -64,24 +64,26 @@ def generator(samples, batch_size=100, augment_data = True):
             images = []
             angles = []
             for image_name, flip, angle in batch_samples:
+                print(image_name, flip, angle)
                 angle = float(angle)
                 if flip == 'True':
                     flip = True
                 else:
                     flip = False
+                print(image_name, flip, angle)
                 image = cv.imread(image_name)
                 if flip:
                     image = np.flip(image,1)
-                images.append(cv.cvtColor(image, cv.COLOR_BGR2YUV))
+                images.append(cv.cvtColor(image, cv.COLOR_BGR2RGB))
                 angles.append(np.float(angle))
                 if augment_data:
-                    images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2YUV))
+                    images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2RGB))
                     angles.append(np.float(angle))
-                    images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2YUV))
+                    images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2RGB))
                     angles.append(np.float(angle))
-                    images.append(cv.cvtColor(blurr1(image), cv.COLOR_BGR2YUV))
+                    images.append(cv.cvtColor(blurr1(image), cv.COLOR_BGR2RGB))
                     angles.append(np.float(angle))
-                    images.append(cv.cvtColor(blurr2(image), cv.COLOR_BGR2YUV))
+                    images.append(cv.cvtColor(blurr2(image), cv.COLOR_BGR2RGB))
                     angles.append(np.float(angle))
             X_train = np.array(images)
             y_train = np.array(angles)
