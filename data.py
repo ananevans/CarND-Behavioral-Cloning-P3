@@ -49,12 +49,18 @@ def blurr2(image):
 
 
 import sklearn.utils
-def generator(samples, batch_size=100):
+def generator(samples, batch_size=100, augment_data = True):
     num_samples = len(samples)
     while 1: # Loop forever so the generator never terminates
         samples = sklearn.utils.shuffle(samples)
-        for offset in range(0, num_samples, int(batch_size/5)):
-            batch_samples = samples[offset:offset+int(batch_size/5)]
+        
+        if augment_data:
+            factor = 5
+        else:
+            factor = 1
+        
+        for offset in range(0, num_samples, int(batch_size/factor)):
+            batch_samples = samples[offset:offset+int(batch_size/factor)]
             images = []
             angles = []
             for image_name, flip, angle in batch_samples:
@@ -68,14 +74,15 @@ def generator(samples, batch_size=100):
                     image = np.flip(image,1)
                 images.append(cv.cvtColor(image, cv.COLOR_BGR2YUV))
                 angles.append(np.float(angle))
-                images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2YUV))
-                angles.append(np.float(angle))
-                images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2YUV))
-                angles.append(np.float(angle))
-                images.append(cv.cvtColor(blurr1(image), cv.COLOR_BGR2YUV))
-                angles.append(np.float(angle))
-                images.append(cv.cvtColor(blurr2(image), cv.COLOR_BGR2YUV))
-                angles.append(np.float(angle))
+                if augment_data:
+                    images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2YUV))
+                    angles.append(np.float(angle))
+                    images.append(cv.cvtColor(brightness(image), cv.COLOR_BGR2YUV))
+                    angles.append(np.float(angle))
+                    images.append(cv.cvtColor(blurr1(image), cv.COLOR_BGR2YUV))
+                    angles.append(np.float(angle))
+                    images.append(cv.cvtColor(blurr2(image), cv.COLOR_BGR2YUV))
+                    angles.append(np.float(angle))
             X_train = np.array(images)
             y_train = np.array(angles)
             yield (X_train, y_train)
