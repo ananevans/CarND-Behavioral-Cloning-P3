@@ -128,8 +128,8 @@ The validation and training losses are:
 | Both Tracks | Side Cameras | Training Loss  | Validation Loss |
 | :---:       |    :----:    |       :--- |        :--- |
 | No          | No           |  0.0191 |  0.0192   |
-| No          | Yes          |  0.0459 |   0.0458  |
-| Yes         | No           |   |     |
+| No          | Yes          |  0.0459 |  0.0458  |
+| Yes         | No           |  0.0671 |  0.0664  |
 | Yes         | Yes          |   |     |
 
 
