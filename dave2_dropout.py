@@ -23,7 +23,7 @@ def dave2():
                      kernel_regularizer=regularizers.l2(0.01),
                      activity_regularizer=regularizers.l1(0.01)))
     
-    model.add(Dropout(0.2))
+    #model.add(Dropout(0.2))
     
     model.add(Conv2D(36, (5, 5), strides=(2, 2), activation="relu", padding="valid", 
                      kernel_regularizer=regularizers.l2(0.01), activity_regularizer=regularizers.l1(0.01)))
