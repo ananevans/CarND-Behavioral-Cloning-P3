@@ -53,6 +53,6 @@ def dave2():
 
 train.train( dave2(), 'dave2', True, False, True, 5)
 train.train( dave2(), 'dave2', True, True, True, 5)
-train.train( dave2(), 'dave2', False, False, True, 5)
-train.train( dave2(), 'dave2', False, True, True, 5)
+#train.train( dave2(), 'dave2', False, False, True, 5)
+#train.train( dave2(), 'dave2', False, True, True, 5)
 
