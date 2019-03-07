@@ -39,9 +39,11 @@ def dave2():
     
     # dense 50
     model.add(Dense(50))
+    model.add(Dropout(0.2))
     
     # dense 10
     model.add(Dense(10))
+    model.add(Dropout(0.2))
     
     # dense 1
     model.add(Dense(1))
