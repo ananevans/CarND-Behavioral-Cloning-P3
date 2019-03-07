@@ -12,7 +12,7 @@ def train(model, filename, track1, side_cameras, use_generators,epochs, keep_str
         print("Validation", len(validation_samples))        
         batch_size = 100
 
-        augment_data = True
+        augment_data = False
         
         if augment_data:
             train_generator = data.generator(train_samples, batch_size = batch_size)
