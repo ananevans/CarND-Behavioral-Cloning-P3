@@ -19,23 +19,18 @@ def dave2():
     # cropping
     model.add(Cropping2D(cropping=((60,20), (0,0))))
    
-    model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="relu", padding="valid", 
-                     kernel_regularizer=regularizers.l2(0.01),
-                     activity_regularizer=regularizers.l1(0.01)))
+    model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
     #model.add(Dropout(0.2))
     
-    model.add(Conv2D(36, (5, 5), strides=(2, 2), activation="relu", padding="valid", 
-                     kernel_regularizer=regularizers.l2(0.01), activity_regularizer=regularizers.l1(0.01)))
+    model.add(Conv2D(36, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
+                     #kernel_regularizer=regularizers.l2(0.01), activity_regularizer=regularizers.l1(0.01)))
     
-    model.add(Conv2D(48, (5, 5), strides=(2, 2), activation="relu", padding="valid", 
-                     kernel_regularizer=regularizers.l2(0.01), activity_regularizer=regularizers.l1(0.01)))
+    model.add(Conv2D(48, (5, 5), strides=(2, 2), activation="relu", padding="valid"))
     
-    model.add(Conv2D(64, (3, 3), activation="relu", padding="valid", 
-                     kernel_regularizer=regularizers.l2(0.01), activity_regularizer=regularizers.l1(0.01)))
+    model.add(Conv2D(64, (3, 3), activation="relu", padding="valid"))
     
-    model.add(Conv2D(64, (3, 3), activation="relu", padding="valid",
-                     kernel_regularizer=regularizers.l2(0.01), activity_regularizer=regularizers.l1(0.01)))
+    model.add(Conv2D(64, (3, 3), activation="relu", padding="valid"))
     
     # flatten
     model.add(Flatten())
