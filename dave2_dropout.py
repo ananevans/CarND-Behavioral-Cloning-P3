@@ -3,7 +3,7 @@ import train
 import numpy as np
             
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda, Conv2D, MaxPooling2D, Cropping2D, BatchNormalization
+from keras.layers import Flatten, Dense, Lambda, Conv2D, Dropout, Cropping2D
 
 import tensorflow as tf
 tf.Session(config=tf.ConfigProto(log_device_placement=True))
@@ -35,6 +35,7 @@ def dave2():
         
     # dense 100
     model.add(Dense(100))
+    model.add(Dropout(0.2))
     
     # dense 50
     model.add(Dense(50))
