@@ -14,10 +14,10 @@ side_cameras = True
 
 def dave2():
     model = Sequential()
+    # normalization
+    model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape=(160,320,3)))
     # cropping
-    model.add(Cropping2D(cropping=((60,20), (0,0)), input_shape=(160,320,3)))
-
-    model.add(Lambda(lambda x: (x / 255.0) - 0.5))
+    model.add(Cropping2D(cropping=((60,20), (0,0))))
    
     model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="relu", padding="valid", 
                      kernel_regularizer=regularizers.l2(0.01),
