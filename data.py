@@ -8,7 +8,7 @@ data_home = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/data/'
 
 def load_data(track1, side_cameras, keep_straight_rate = 1.0):
     if track1:
-        data_dirs = glob.glob(data_home + 'track1_nora*')
+        data_dirs = glob.glob(data_home + 'track1_data*')
         #data_dirs = glob.glob(data_home + 'track1_data*')
     else:
         data_dirs = glob.glob(data_home + '*')

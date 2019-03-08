@@ -10,7 +10,7 @@ def train(model, filename, track1, side_cameras, use_generators,epochs, keep_str
         train_samples, validation_samples = train_test_split(samples, test_size=0.2)
         print("Training", len(train_samples))
         print("Validation", len(validation_samples))        
-        batch_size = 100
+        batch_size = 20
 
         augment_data = True
         
