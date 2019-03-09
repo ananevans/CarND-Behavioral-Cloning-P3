@@ -55,7 +55,7 @@ Replace model.h5 with one of the models available [here](http://www.cs.virginia.
 
 #### 1. An appropriate model architecture has been employed
 
-First, I used the Dave-2 model. The first layer is the normalization suggested in the project directions.
+First, I used the Dave-2 model. The first layer is the normalization suggested in the project directions. The secong layer is cropping the image to contain only the relevant road image. Next, there are five convolution layers. After the flatteing layer, there are four dense layers, with the last one consisting of one neuron.
 
 Layer (type)                 Output Shape              Param # 
 lambda_1 (Lambda)            (None, 160, 320, 3)       0         
@@ -74,7 +74,7 @@ dense_4 (Dense)              (None, 1)                 11
 
 #### 2. Attempts to reduce overfitting in the model
 
-To reduce overfitting, I created a second model with dropout layers after each fully-connected layer with rate 0.2. I also added L2 kernel regularization with parameter 0.01 to all convolutional layers.
+To reduce overfitting, I created a second model with dropout layers after each fully-connected layer with rate 0.2. I also added L2 kernel regularization with parameter 0.01 to all convolutional layers. I was hoping this model would be easier to train on a training set containing some bad data and might generalize to the second track without adding images from it in the training set. 
 
 Layer (type)                 Output Shape              Param # 
 cropping2d_1 (Cropping2D)    (None, 80, 320, 3)        0         
@@ -109,11 +109,22 @@ I tried different data sets:
 
 #### 1. Solution Design Approach
 
-I started with the Dave-2 architecture and I modified it by adding L2-regularization to the convolutional layers and dropout layers. 
+Since we do not work with a benchmark data set, I chose to start by using a well-known network, the NVidia Dave-2. This network has no regularization, and I thought that adding regularization to all layers, it would make the network easier to train on the data I generated which was not so smooth as the provided one. 
+
+First, I use the keyboard to generate my own data and didn't used the data provided. Both models failed to complete the first track. The histogram showed that the steering angles were either zero or maximum left or right. I tried to use the mouse and generated a set of data at very low speed and very carefully. The models trained on this data failed even worse. Next, I tried to generate data driving fast. The models trained on this data did a little better, but still failed. I noticed then, the test is performed at constant medium speed. I tried to generate the data close to that speed and it almost worked. There were two places were there were still problems. First, right after the bridge the car was going off the road, because there is no shoulder. I collected more data driving by that spot and it solved the problem. The second problem was around the last sharp curve. In the training, towards the end of the track, I kept forgeting to check the speed and I was taking it too fast. Again, I added more data driving carefully and kept the car on the road. 
+
+Since I had all this problems with data collection, I decided to experiment using the data provided by Udacity. The Dave-2 network is pretty big and the data provided not a lot. I decided to add data augmentation to get a training data set five times bigger. This approach seemed to improve the smoothness of the driving.
+
+Since the network with strong regularization did not generalize to the second track and creates a worse model on the not so smooth data, I decided it was not an useful approach.
+
+By looking at the steering angles, as suggested in the directions, there are many more examples with close to zero steering angles. To reduce the weight of such examples in the training set, I decided not to flip the images with angles close to zero. For all the other angles, I flip the image and assign the negative of the steering angle. This strategy doubles the available training data for bigger absolute value steering angles. 
+
+I attempted to further reduce the number of examples with small steering angles by randomly dropping with a given probability images from the overrepresented set. This strategy created a nice histogram, but made the model learn to steer too much. I abandoned this strategy.
+
 
 #### 2. Final Model Architecture
 
-The smallest loss is realized by .... TODO
+The smallest loss is realized by the Dave-2 architecture trained with data provided by Udacity for track 1 and my own data for track 2.
 
 #### 3. Creation of the Training Set & Training Process
 
@@ -150,6 +161,8 @@ Here is the distribution of the angle values for all data:
 Here is the distribution of the angle values for my track 1 data:
 
 ![alt text][image6]
+
+From this two images, we can observe that adding images from the second track was very useful in improving the distribution of steering angles.
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
