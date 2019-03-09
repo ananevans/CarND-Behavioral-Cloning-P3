@@ -55,7 +55,7 @@ Replace model.h5 with one of the models available [here](http://www.cs.virginia.
 
 #### 1. An appropriate model architecture has been employed
 
-First, I used the Dave-2 model. The first layer is the normalization suggested in the project directions. The secong layer is cropping the image to contain only the relevant road image. Next, there are five convolution layers. After the flatteing layer, there are four dense layers, with the last one consisting of one neuron.
+First, I used the Dave-2 model. The first layer is the normalization suggested in the project directions. The second layer is cropping the image to contain only the relevant road image. Next, there are five convolution layers. These layers are acting as feature extractors. One such example is the network learns to identify the sides of the road even when they are significantly different than the ones in the training daata. After the flattening layer, there are four dense layers, with the last one consisting of one neuron since this is a regression network that output a real value representing the steering angle.
 
 Layer (type)                 Output Shape              Param # 
 lambda_1 (Lambda)            (None, 160, 320, 3)       0         
@@ -111,7 +111,7 @@ I tried different data sets:
 
 Since we do not work with a benchmark data set, I chose to start by using a well-known network, the NVidia Dave-2. This network has no regularization, and I thought that adding regularization to all layers, it would make the network easier to train on the data I generated which was not so smooth as the provided one. 
 
-First, I use the keyboard to generate my own data and didn't used the data provided. Both models failed to complete the first track. The histogram showed that the steering angles were either zero or maximum left or right. I tried to use the mouse and generated a set of data at very low speed and very carefully. The models trained on this data failed even worse. Next, I tried to generate data driving fast. The models trained on this data did a little better, but still failed. I noticed then, the test is performed at constant medium speed. I tried to generate the data close to that speed and it almost worked. There were two places were there were still problems. First, right after the bridge the car was going off the road, because there is no shoulder. I collected more data driving by that spot and it solved the problem. The second problem was around the last sharp curve. In the training, towards the end of the track, I kept forgeting to check the speed and I was taking it too fast. Again, I added more data driving carefully and kept the car on the road. 
+First, I use the keyboard to generate my own data and did not used the data provided. Both models failed to complete the first track. The histogram showed that the steering angles were either zero or maximum left or right. I tried to use the mouse and generated a set of data at very low speed and very carefully. The models trained on this data failed even worse. Next, I tried to generate data driving fast. The models trained on this data did a little better, but still failed. I noticed then, the test is performed at constant medium speed. I tried to generate the data close to that speed and it almost worked. There were two places were there were still problems. First, right after the bridge the car was going off the road, because there is no shoulder. I collected more data driving by that spot and it solved the problem. The second problem was around the last sharp curve. In the training, towards the end of the track, I kept forgeting to check the speed and I was taking it too fast. Again, I added more data driving carefully and kept the car on the road. 
 
 Since I had all this problems with data collection, I decided to experiment using the data provided by Udacity. The Dave-2 network is pretty big and the data provided not a lot. I decided to add data augmentation to get a training data set five times bigger. This approach seemed to improve the smoothness of the driving.
 
@@ -170,5 +170,5 @@ I experimented with keeping only a fraction of angles close to zero, but it didn
 
 ### Conclusions
 
-The dave2 model with dropout is harder to train with data recorded from less than ideal runs. The use of side images was very important. 
+The dave2 model with dropout is harder to train with data recorded from less than ideal runs. The use of side images was very important. Without those images the training set was three times smaller and had too many values close to zero.
 
