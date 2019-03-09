@@ -34,10 +34,10 @@ My project includes the following files:
 * train.py containing the script to train a given convolutional network
 * dave2.py containing the Dave2 architecture and calls to train it
 * dave2_dropout.py containing a modified Dave2 architecture and calls to train it
-* ....h5 containing a trained convolution neural network 
+* models are available [here](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3)
 * writeup.md summarizing the results (this document)
-* a recording of autonomous driving on the first track for both architectures
-* a recording of autonomous driving on the second track
+* recordings of autonomous driving on both tracks are linked from this document
+* the training data is available [here](https://github.com/ananevans/CarND-Behavioral-Cloning-P3-Data)
 
 #### 2. Submission includes functional code
 
