@@ -43,8 +43,10 @@ My project includes the following files:
 
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
-python drive.py ....h5
+python drive.py model.h5
 ```
+Replace model.h5 with one of the models available [here](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3).
+
 
 #### 3. Submission code is usable and readable
 
@@ -97,10 +99,10 @@ The model used an adam optimizer, so the learning rate was not tuned manually.
 #### 4. Appropriate training data
 
 I tried different data sets:
-1. Udacity data only: both models complete track 1, but fail very quickly on track 2 [dave2](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/udacity_data_augmentation/dave2.mp4) [dave2-dropout](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/udacity_data_augmentation/dave2-droput.mp4). Both models are available [here](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/udacity_data_augmentation/)
-2. Udacity data, plus data I recorded on track 2: dave2 model completes both tracks([track 1](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/udacity_and_track_2/dave2_track1.mp4), [track2](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/udacity_and_track_2/dave2_track2.mp4), but the model with normalization does not.
-3. My data for track 1 only: both models complete track 1 [dave2](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/noras_data/dave2-track1.mp4). The models are available [here](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/noras_data/), [dave2-dropout](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/noras_data/dave2-dropout_track1.mp4).
-4. All data: the dave2 model completes both tracks ([track1](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/noras_data/dave2-all-track1.mp4), [track2](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/noras_data/dave2-all-track2.mp4). The models are available [here](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/noras_data/)
+1. Udacity data only: both models complete track 1, but fail very quickly on track 2 ([dave2](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/udacity_data_augmentation/dave2.mp4), [dave2-dropout](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/udacity_data_augmentation/dave2-droput.mp4)). Both models are available [here](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/udacity_data_augmentation/).
+2. Udacity data, plus data I recorded on track 2: dave2 model completes both tracks([track 1](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/udacity_and_track_2/dave2_track1.mp4), [track2](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/udacity_and_track_2/dave2_track2.mp4)), but the model with normalization does not.
+3. My data for track 1 only: both models complete track 1: [dave2](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/noras_data/dave2-track1.mp4), [dave2-dropout](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/noras_data/dave2-dropout_track1.mp4). The models are available [here](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/noras_data/).
+4. All data: the dave2 model completes both tracks ([track1](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/noras_data/dave2-all-track1.mp4), [track2](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/noras_data/dave2-all-track2.mp4), the dave2 model with dropout fails on both tracks. The models are available [here](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3/noras_data/).
 
 ### Model Architecture and Training Strategy
 
@@ -142,11 +144,17 @@ I also augment the input data by radomly changing the brightness (file data.py, 
 
 Here is the distribution of the angle values for all data:
 
-![alt text][image6]
+![alt text][image5]
 
 Here is the distribution of the angle values for my track 1 data:
 
-![alt text][image5]
+![alt text][image6]
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
+
+I experimented with keeping only a fraction of angles close to zero, but it didn't seem to work. I do not flip the image if the angle is close to zero.
+
+### Conclusions
+
+The dave2 model with dropout is harder to train with data recorded from less than ideal runs. The use of side images was very important. 
 
