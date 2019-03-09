@@ -16,8 +16,8 @@ The goals / steps of this project are the following:
 [image2]: ./writeup/cropped_images.png "Cropped Images"
 [image3]: ./writeup/flipped_images.png "Flipped Images"
 [image4]: ./writeup/augmented_images.png "Augmented Images"
-[image5]: ./writeup/hist0.5.png "Steering Angle Distribution Keeping Half of the Small Angles"
-[image6]: ./writeup/hist1.0.png "Steering Angle Distribution"
+[image5]: ./writeup/hist-all.png "Steering Angle Distribution"
+[image6]: ./writeup/hist-track1.png "Steering Angle (track1 only)"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -140,11 +140,11 @@ I also augment the input data by radomly changing the brightness (file data.py, 
 
 ![alt text][image4]
 
-Here is the distribution of the angle values:
+Here is the distribution of the angle values for all data:
 
 ![alt text][image6]
 
-To reduce the number of angles very close to zero, I decided to keep only half of those values. Here is the new distribution:
+Here is the distribution of the angle values for my track 1 data:
 
 ![alt text][image5]
 
