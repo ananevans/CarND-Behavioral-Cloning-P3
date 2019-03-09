@@ -5,11 +5,11 @@ import matplotlib.gridspec as gridspec
 from fileinput import filename
 
 def data_distribution(keep_straight_rate):
-    samples = data.load_data(False, True, keep_straight_rate=keep_straight_rate)
+    samples = data.load_data(True, True, keep_straight_rate=keep_straight_rate)
     y_train = samples[:,2]
     y_train = y_train.astype(float)
     plt.hist(y_train, bins=21)
-    filename = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/writeup/hist' + str(keep_straight_rate) + '.png'
+    filename = '/home/ans5k/work/CarND-Behavioral-Cloning-P3/writeup/hist-track1.png'
     plt.savefig( filename, bbox_inches='tight')
 
 def original():
@@ -68,4 +68,4 @@ def augmetation():
 # augmetation()
 
 #data_distribution(1.0)
-data_distribution(0.3)
+data_distribution(1.0)
