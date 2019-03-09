@@ -36,7 +36,8 @@ My project includes the following files:
 * dave2_dropout.py containing a modified Dave2 architecture and calls to train it
 * models are available [here](http://www.cs.virginia.edu/~ans5k/CarND-Behavioral-Cloning-P3)
 * writeup.md summarizing the results (this document)
-* recordings of autonomous driving on both tracks are linked from this document
+* recordings of autonomous driving on both tracks are linked from this document and [here](./models/udacity_and_track_2/)
+* recording of the best [run](./models/udacity_and_track_2/dave2_track1.mp4)
 * the training data is available [here](https://github.com/ananevans/CarND-Behavioral-Cloning-P3-Data)
 
 #### 2. Submission includes functional code
